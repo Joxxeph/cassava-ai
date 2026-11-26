@@ -1,6 +1,6 @@
 from pathlib import Path
 from copy import deepcopy
-
+from src.deployment import load_deployment_bundle
 import json
 import time
 
@@ -469,36 +469,23 @@ class CassavaInferenceEngine:
 
     def get_bundle(self, model_name):
 
-        if self.active_architecture != model_name:
+        if self.active_architecture == model_name:
+            if self.active_bundle is not None:
+                return self.active_bundle
 
-            self.unload()
+        self.unload()
 
-            self.active_bundle = (
+        self.active_bundle = load_deployment_bundle(
+            project_dir=self.project_dir,
+            model_name=model_name,
+            centralized_registry=self.centralized_registry,
+            federated_registry=self.federated_registry,
+            device=self.device,
+        )
 
-                load_shared_architecture(
-
-                    project_dir=self.project_dir,
-
-                    model_name=model_name,
-
-                    centralized_registry=(
-                        self.centralized_registry
-                    ),
-
-                    federated_registry=(
-                        self.federated_registry
-                    ),
-
-                    device=self.device
-
-                )
-
-            )
-
-            self.active_architecture = model_name
+        self.active_architecture = model_name
 
         return self.active_bundle
-
 
     def preprocess(self, image):
 

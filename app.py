@@ -1,25 +1,22 @@
-import os
 
-os.environ.setdefault(
-    "CUBLAS_WORKSPACE_CONFIG",
-    ":4096:8"
-)
-
-from pathlib import Path
-from io import BytesIO
-
-import json
+import gc
 import hashlib
+import io
+import json
+import threading
+from pathlib import Path
 
-import numpy as np
 import pandas as pd
 import streamlit as st
 import torch
 
 from PIL import Image, ImageOps
-
 from src.inference import CassavaInferenceEngine
 
+
+# ==========================================================
+# 1. CONFIGURACIÓN GENERAL
+# ==========================================================
 
 PROJECT_DIR = Path(__file__).resolve().parent
 
@@ -30,700 +27,714 @@ REPORTS_DIR = (
     / "ensemble_cached_v1"
 )
 
-MODEL_NAMES = {
-
-    "ensemble": "Ensemble heterogéneo",
-
-    "mobilenet_v3_large": "MobileNetV3-Large",
-
-    "efficientnet_b0": "EfficientNet-B0",
-
-    "resnet50": "ResNet50",
-
-    "vit_b_16": "ViT-B/16",
-
-    "swin_t": "Swin-Tiny"
-
-}
-
-APPROACH_NAMES = {
-
-    "centralized": "Centralizado",
-
-    "federated": "Federado",
-
-    "both": "Ambos"
-
-}
-
-CLASS_NAMES = {
-
-    "bacterial_blight":
-        "Tizón bacteriano",
-
-    "brown_streak_disease":
-        "Enfermedad de la estría marrón",
-
-    "green_mottle":
-        "Moteado verde",
-
-    "healthy":
-        "Hoja sana",
-
-    "mosaic_disease":
-        "Enfermedad del mosaico"
-
-}
-
+MAX_FILE_SIZE = 10 * 1024 * 1024
+MAX_IMAGE_PIXELS = 25_000_000
 
 st.set_page_config(
-
     page_title="Cassava AI",
-
     page_icon="🌿",
-
-    layout="wide"
-
+    layout="wide",
+    initial_sidebar_state="expanded",
 )
 
 
+# ==========================================================
+# 2. NOMBRES DE MODELOS Y CLASES
+# ==========================================================
+
+MODEL_NAMES = {
+    "ensemble": "Ensemble heterogéneo",
+    "mobilenet_v3_large": "MobileNetV3-Large",
+    "efficientnet_b0": "EfficientNet-B0",
+    "resnet50": "ResNet50",
+    "vit_b_16": "ViT-B/16",
+    "swin_t": "Swin-Tiny",
+}
+
+APPROACH_NAMES = {
+    "centralized": "Centralizado",
+    "federated": "Federado",
+    "both": "Ambos enfoques",
+}
+
+CLASS_NAMES = {
+    "bacterial_blight": "Tizón bacteriano",
+    "brown_streak_disease": "Enfermedad de estría marrón",
+    "green_mottle": "Moteado verde",
+    "healthy": "Hoja sana",
+    "mosaic_disease": "Enfermedad del mosaico",
+}
+
+
+# ==========================================================
+# 3. MOTOR DE INFERENCIA COMPARTIDO
+# ==========================================================
+
+@st.cache_resource(show_spinner=False)
 def get_engine():
 
-    if "inference_engine" not in st.session_state:
+    torch.set_num_threads(1)
 
-        device = torch.device(
+    engine = CassavaInferenceEngine(
+        project_dir=PROJECT_DIR,
+        device=torch.device("cpu"),
+    )
 
-            "cuda"
+    lock = threading.Lock()
 
-            if torch.cuda.is_available()
+    return engine, lock
 
-            else "cpu"
 
-        )
-
-        st.session_state["inference_engine"] = (
-
-            CassavaInferenceEngine(
-
-                project_dir=PROJECT_DIR,
-
-                device=device
-
-            )
-
-        )
-
-    return st.session_state["inference_engine"]
-
+# ==========================================================
+# 4. CARGA DE RESULTADOS EXPERIMENTALES
+# ==========================================================
 
 @st.cache_data
 def load_experimental_results():
 
-    return pd.read_csv(
+    results_path = REPORTS_DIR / "all_test_results.csv"
 
-        REPORTS_DIR / "all_test_results.csv"
+    if not results_path.exists():
+        return None
 
+    return pd.read_csv(results_path)
+
+
+# ==========================================================
+# 5. FUNCIONES AUXILIARES
+# ==========================================================
+
+def translate_class(class_name):
+
+    return CLASS_NAMES.get(class_name, class_name)
+
+
+def translate_model(model_name):
+
+    if model_name == "heterogeneous_ensemble":
+        return "Ensemble heterogéneo"
+
+    return MODEL_NAMES.get(model_name, model_name)
+
+
+def load_uploaded_image(uploaded_file):
+
+    image_bytes = uploaded_file.getvalue()
+
+    if len(image_bytes) > MAX_FILE_SIZE:
+        raise ValueError(
+            "La imagen supera el límite de 10 MB."
+        )
+
+    with Image.open(io.BytesIO(image_bytes)) as source:
+
+        if source.format not in {"JPEG", "PNG"}:
+            raise ValueError(
+                "El archivo debe ser una imagen JPEG o PNG."
+            )
+
+        width, height = source.size
+
+        if width * height > MAX_IMAGE_PIXELS:
+            raise ValueError(
+                "La resolución de la imagen es demasiado alta."
+            )
+
+        image = ImageOps.exif_transpose(source)
+        image = image.convert("RGB")
+
+    return image, image_bytes
+
+
+def build_prediction_key(
+    image_bytes,
+    approach,
+    model_name,
+):
+
+    image_hash = hashlib.sha256(
+        image_bytes
+    ).hexdigest()
+
+    return (
+        f"{image_hash}_{approach}_{model_name}"
     )
 
 
-def display_prediction(approach, result):
+# ==========================================================
+# 6. VISUALIZACIÓN DE PREDICCIONES
+# ==========================================================
+
+def display_prediction(prediction, approach):
 
     st.subheader(
-        APPROACH_NAMES[approach]
+        APPROACH_NAMES.get(approach, approach)
     )
 
-    predicted_class = result["predicted_class"]
+    predicted_class = prediction["predicted_class"]
+
+    confidence = float(
+        prediction["confidence"]
+    )
+
+    probabilities = prediction["probabilities"]
 
     st.metric(
-
-        "Clase predicha",
-
-        CLASS_NAMES.get(
-            predicted_class,
-            predicted_class
-        )
-
+        label="Clase predicha",
+        value=translate_class(predicted_class),
     )
 
     st.metric(
-
-        "Probabilidad máxima",
-
-        f"{result['confidence']:.2%}"
-
+        label="Probabilidad máxima",
+        value=f"{confidence * 100:.2f}%",
     )
 
-    probabilities = sorted(
+    st.markdown("#### Probabilidades por clase")
 
-        result["probabilities"].items(),
-
+    sorted_probabilities = sorted(
+        probabilities.items(),
         key=lambda item: item[1],
-
-        reverse=True
-
+        reverse=True,
     )
 
-    for class_name, probability in probabilities:
+    for class_name, probability in sorted_probabilities:
 
-        label = CLASS_NAMES.get(
-
-            class_name,
-
-            class_name
-
-        )
+        probability = float(probability)
 
         st.write(
-            f"{label}: {probability:.2%}"
+            f"**{translate_class(class_name)}**"
+            f" — {probability * 100:.2f}%"
         )
 
         st.progress(
-            float(np.clip(probability, 0, 1))
+            max(0.0, min(1.0, probability))
         )
+
+
+def display_individual_predictions(result):
+
+    individual = result.get(
+        "individual_predictions",
+        {},
+    )
+
+    if not individual:
+        return
 
     with st.expander(
-        "Predicciones individuales"
+        "Consultar predicciones individuales"
     ):
 
-        rows = []
+        st.json(individual, expanded=False)
 
-        for architecture, prediction in (
 
-            result["individual_predictions"].items()
-
-        ):
-
-            rows.append({
-
-                "Modelo": MODEL_NAMES.get(
-
-                    architecture,
-
-                    architecture
-
-                ),
-
-                "Predicción": CLASS_NAMES.get(
-
-                    prediction["predicted_class"],
-
-                    prediction["predicted_class"]
-
-                ),
-
-                "Probabilidad máxima": round(
-
-                    prediction["confidence"] * 100,
-
-                    2
-
-                )
-
-            })
-
-        st.dataframe(
-
-            pd.DataFrame(rows),
-
-            hide_index=True,
-
-            use_container_width=True
-
-        )
-
+# ==========================================================
+# 7. PÁGINA DE CLASIFICACIÓN
+# ==========================================================
 
 def classification_page():
 
-    st.header(
-        "Clasificación de hojas de yuca"
+    st.title("🌿 Cassava AI")
+
+    st.markdown(
+        """
+        Sistema inteligente para la clasificación
+        de enfermedades de hojas de yuca mediante
+        aprendizaje profundo, aprendizaje federado
+        y ensembles heterogéneos.
+        """
     )
 
-    st.write(
+    st.divider()
 
-        "Carga una fotografía de una hoja de yuca "
-        "para obtener una clasificación mediante "
-        "modelos de inteligencia artificial."
+    col1, col2 = st.columns(2)
 
-    )
+    with col1:
 
-    approach = st.selectbox(
+        approach = st.selectbox(
+            "Enfoque de aprendizaje",
+            options=list(APPROACH_NAMES.keys()),
+            format_func=lambda x: APPROACH_NAMES[x],
+        )
 
-        "Enfoque de aprendizaje",
+    with col2:
 
-        options=list(APPROACH_NAMES),
-
-        format_func=lambda x: APPROACH_NAMES[x]
-
-    )
-
-    model_name = st.selectbox(
-
-        "Modelo de clasificación",
-
-        options=list(MODEL_NAMES),
-
-        format_func=lambda x: MODEL_NAMES[x]
-
-    )
+        model_name = st.selectbox(
+            "Modelo de clasificación",
+            options=list(MODEL_NAMES.keys()),
+            format_func=lambda x: MODEL_NAMES[x],
+        )
 
     uploaded_file = st.file_uploader(
-
-        "Seleccionar imagen",
-
-        type=["jpg", "jpeg", "png"]
-
+        "Cargar una imagen de una hoja de yuca",
+        type=["jpg", "jpeg", "png"],
+        accept_multiple_files=False,
     )
 
     if uploaded_file is None:
 
         st.info(
-            "Selecciona una imagen para comenzar."
-        )
-
-        return
-
-    image_bytes = uploaded_file.getvalue()
-
-    if len(image_bytes) > 10 * 1024**2:
-
-        st.error(
-            "La imagen supera el límite de 10 MB."
+            "Selecciona una imagen para iniciar "
+            "la clasificación."
         )
 
         return
 
     try:
 
-        with Image.open(
-            BytesIO(image_bytes)
-        ) as original:
+        image, image_bytes = load_uploaded_image(
+            uploaded_file
+        )
 
-            if (
-                original.width * original.height
-                > 25_000_000
-            ):
-
-                st.error(
-                    "La resolución de la imagen "
-                    "es demasiado grande."
-                )
-
-                return
-
-            image = ImageOps.exif_transpose(
-
-                original
-
-            ).convert("RGB")
-
-    except Exception:
+    except Exception as error:
 
         st.error(
-            "No fue posible abrir la imagen."
+            f"No fue posible abrir la imagen: {error}"
         )
 
         return
 
-    image_col, info_col = st.columns([1, 1])
+    preview = image.copy()
+    preview.thumbnail((600, 600))
 
-    with image_col:
-
-        st.image(
-
-            image,
-
-            caption="Imagen seleccionada",
-
-            use_container_width=True
-
-        )
-
-    with info_col:
-
-        st.write(
-            "**Archivo:**", uploaded_file.name
-        )
-
-        st.write(
-            "**Resolución:**",
-            f"{image.width} × {image.height}"
-        )
-
-        st.write(
-            "**Modelo:**", MODEL_NAMES[model_name]
-        )
-
-        st.write(
-            "**Enfoque:**", APPROACH_NAMES[approach]
-        )
-
-    prediction_key = (
-
-        hashlib.sha256(image_bytes).hexdigest(),
-
-        approach,
-
-        model_name
-
+    st.image(
+        preview,
+        caption="Imagen seleccionada",
     )
 
+    prediction_key = build_prediction_key(
+        image_bytes,
+        approach,
+        model_name,
+    )
+
+    if model_name == "ensemble":
+
+        st.info(
+            "El ensemble ejecuta cinco arquitecturas "
+            "de forma secuencial. La primera predicción "
+            "puede tardar mientras se descargan los "
+            "pesos preentrenados."
+        )
+
     if st.button(
-
         "Clasificar imagen",
-
         type="primary",
-
-        use_container_width=True
-
+        use_container_width=True,
     ):
 
         st.session_state.pop(
-            "prediction_result", None
+            "prediction_result",
+            None,
         )
 
         st.session_state.pop(
-            "prediction_key", None
+            "prediction_key",
+            None,
         )
 
         try:
 
             with st.spinner(
-
-                "Cargando modelos y "
-                "analizando la imagen..."
-
+                "Procesando imagen y ejecutando modelos..."
             ):
 
-                engine = get_engine()
+                engine, lock = get_engine()
 
-                prediction = engine.predict(
+                with lock:
 
-                    image=image,
+                    try:
 
-                    approach=approach,
+                        result = engine.predict(
+                            image=image,
+                            approach=approach,
+                            model_name=model_name,
+                        )
 
-                    model_name=model_name
+                    finally:
 
-                )
+                        # Liberar el modelo activo después
+                        # de cada solicitud para reducir RAM.
+                        engine.unload()
+                        gc.collect()
 
-            st.session_state[
-                "prediction_result"
-            ] = prediction
+                st.session_state[
+                    "prediction_result"
+                ] = result
 
-            st.session_state[
-                "prediction_key"
-            ] = prediction_key
+                st.session_state[
+                    "prediction_key"
+                ] = prediction_key
 
         except Exception as error:
 
             st.error(
-                f"Error de inferencia: {error}"
+                "No fue posible completar la clasificación."
             )
 
-            return
+            with st.expander("Detalles técnicos"):
 
-    if st.session_state.get(
-        "prediction_key"
-    ) != prediction_key:
+                st.exception(error)
+
+    # Evita mostrar resultados correspondientes
+    # a una imagen o selección anterior.
+
+    if (
+        st.session_state.get("prediction_key")
+        != prediction_key
+    ):
 
         return
 
-    prediction = st.session_state.get(
+    result = st.session_state.get(
         "prediction_result"
     )
 
-    if prediction is None:
+    if result is None:
         return
 
     st.divider()
+    st.header("Resultados de clasificación")
 
-    st.header("Resultados")
+    predictions = result["results"]
 
-    results = prediction["results"]
+    if approach == "both":
 
-    columns = st.columns(len(results))
+        central_col, federal_col = st.columns(2)
 
-    for column, (key, result) in zip(
-
-        columns,
-
-        results.items()
-
-    ):
-
-        with column:
+        with central_col:
 
             display_prediction(
-                key,
-                result
+                predictions["centralized"],
+                "centralized",
             )
 
-    st.caption(
+        with federal_col:
 
-        "Tiempo de inferencia: "
+            display_prediction(
+                predictions["federated"],
+                "federated",
+            )
 
-        f"{prediction['inference_seconds']:.2f} s"
+    else:
 
+        display_prediction(
+            predictions[approach],
+            approach,
+        )
+
+    inference_seconds = result.get(
+        "inference_seconds"
     )
 
+    if inference_seconds is not None:
+
+        st.caption(
+            "Tiempo de inferencia reportado por el motor: "
+            f"{float(inference_seconds):.2f} segundos"
+        )
+
+    display_individual_predictions(result)
+
     st.download_button(
-
-        "Descargar resultado JSON",
-
+        label="Descargar resultados JSON",
         data=json.dumps(
-
-            prediction,
-
+            result,
+            ensure_ascii=False,
             indent=4,
-
-            ensure_ascii=False
-
+            default=str,
         ),
-
         file_name="cassava_prediction.json",
-
-        mime="application/json"
-
+        mime="application/json",
     )
 
     st.warning(
-
-        "La predicción es orientativa. "
-        "Las probabilidades no están calibradas "
-        "y el sistema no sustituye una evaluación "
-        "fitosanitaria profesional."
-
+        "Este sistema es un prototipo académico. "
+        "Las probabilidades no representan una certeza "
+        "diagnóstica y no sustituyen la evaluación "
+        "de un especialista agrícola."
     )
 
+
+# ==========================================================
+# 8. PÁGINA DE RESULTADOS EXPERIMENTALES
+# ==========================================================
 
 def experimental_results_page():
 
-    st.header(
-        "Resultados experimentales"
+    st.title("📊 Resultados experimentales")
+
+    st.markdown(
+        """
+        Comparación del rendimiento de los modelos
+        centralizados, federados y ensembles sobre
+        el conjunto independiente de evaluación.
+        """
     )
 
-    try:
+    df = load_experimental_results()
 
-        df = load_experimental_results()
+    if df is None:
 
-    except FileNotFoundError:
+        st.warning(
+            "El archivo de resultados experimentales "
+            "no está disponible en el repositorio."
+        )
 
-        st.error(
-            "No se encontraron los resultados "
-            "experimentales de la Fase 4."
+        st.code(
+            str(
+                REPORTS_DIR
+                / "all_test_results.csv"
+            )
         )
 
         return
 
-    st.caption(
-
-        "Evaluación sobre 3.210 imágenes "
-        "del test independiente."
-
-    )
-
-    ensembles = df[
-
-        df["model"] == "heterogeneous_ensemble"
-
-    ]
-
-    columns = st.columns(2)
-
-    for column, approach in zip(
-
-        columns,
-
-        ["centralized", "federated"]
-
-    ):
-
-        row = ensembles[
-
-            ensembles["approach"] == approach
-
-        ].iloc[0]
-
-        with column:
-
-            st.metric(
-
-                f"Ensemble {APPROACH_NAMES[approach]}",
-
-                f"{row['f1_macro']:.2%}",
-
-                help="F1 Macro sobre el test"
-
-            )
-
-    metrics = [
-
+    required_columns = {
+        "model",
+        "approach",
         "f1_macro",
+    }
 
-        "accuracy",
+    if not required_columns.issubset(df.columns):
 
-        "precision_macro",
-
-        "recall_macro",
-
-        "f1_weighted",
-
-        "balanced_accuracy"
-
-    ]
-
-    metric = st.selectbox(
-
-        "Métrica de comparación",
-
-        metrics
-
-    )
-
-    chart_data = df.pivot(
-
-        index="model",
-
-        columns="approach",
-
-        values=metric
-
-    )
-
-    st.bar_chart(chart_data)
-
-    st.dataframe(
-
-        df.sort_values(
-
-            metric,
-
-            ascending=False
-
-        ).round(4),
-
-        hide_index=True,
-
-        use_container_width=True
-
-    )
-
-    for approach in [
-        "centralized",
-        "federated"
-    ]:
-
-        path = (
-
-            REPORTS_DIR
-
-            / f"{approach}_ensemble_confusion.png"
-
+        st.error(
+            "El archivo de resultados no tiene "
+            "las columnas esperadas."
         )
 
-        if path.exists():
+        st.dataframe(df)
 
-            st.subheader(
+        return
 
-                "Matriz de confusión - "
+    ensemble_df = df[
+        df["model"].isin(
+            ["ensemble", "heterogeneous_ensemble"]
+        )
+    ]
 
-                + APPROACH_NAMES[approach]
+    col1, col2 = st.columns(2)
 
+    with col1:
+
+        central = ensemble_df[
+            ensemble_df["approach"] == "centralized"
+        ]
+
+        if not central.empty:
+
+            st.metric(
+                "F1 Macro — Ensemble centralizado",
+                f"{central.iloc[0]['f1_macro']:.4f}",
             )
+
+    with col2:
+
+        federated = ensemble_df[
+            ensemble_df["approach"] == "federated"
+        ]
+
+        if not federated.empty:
+
+            st.metric(
+                "F1 Macro — Ensemble federado",
+                f"{federated.iloc[0]['f1_macro']:.4f}",
+            )
+
+    metric_names = {
+        "f1_macro": "F1 Macro",
+        "accuracy": "Accuracy",
+        "precision_macro": "Precisión Macro",
+        "recall_macro": "Recall Macro",
+        "f1_weighted": "F1 ponderado",
+        "balanced_accuracy": "Balanced Accuracy",
+    }
+
+    available_metrics = [
+        metric
+        for metric in metric_names
+        if metric in df.columns
+    ]
+
+    selected_metric = st.selectbox(
+        "Métrica de comparación",
+        options=available_metrics,
+        format_func=lambda x: metric_names[x],
+    )
+
+    chart_df = df.pivot_table(
+        index="model",
+        columns="approach",
+        values=selected_metric,
+        aggfunc="first",
+    )
+
+    chart_df.index = [
+        translate_model(name)
+        for name in chart_df.index
+    ]
+
+    chart_df = chart_df.rename(
+        columns=APPROACH_NAMES
+    )
+
+    st.bar_chart(chart_df)
+
+    st.subheader("Tabla de resultados")
+
+    display_df = df.copy()
+
+    display_df["model"] = (
+        display_df["model"]
+        .map(translate_model)
+    )
+
+    display_df["approach"] = (
+        display_df["approach"]
+        .map(
+            lambda x: APPROACH_NAMES.get(x, x)
+        )
+    )
+
+    st.dataframe(
+        display_df,
+        use_container_width=True,
+        hide_index=True,
+    )
+
+    st.subheader("Matrices de confusión")
+
+    confusion_images = sorted(
+        REPORTS_DIR.rglob("*confusion*.png")
+    )
+
+    if confusion_images:
+
+        for image_path in confusion_images:
 
             st.image(
-                str(path),
-                use_container_width=True
+                str(image_path),
+                caption=image_path.stem,
             )
 
+    else:
+
+        st.caption(
+            "No se encontraron matrices de confusión "
+            "en los archivos publicados."
+        )
+
+    st.download_button(
+        "Descargar resultados experimentales",
+        data=df.to_csv(index=False).encode("utf-8-sig"),
+        file_name="cassava_test_results.csv",
+        mime="text/csv",
+    )
+
+
+# ==========================================================
+# 9. PÁGINA DE INFORMACIÓN
+# ==========================================================
 
 def about_page():
 
-    st.header("Acerca del proyecto")
+    st.title("Acerca de Cassava AI")
 
-    st.markdown("""
+    st.markdown(
+        """
+        ## Objetivo
 
-    **Cassava AI** es un prototipo de clasificación
-    de enfermedades de hojas de yuca mediante
-    aprendizaje profundo.
+        Desarrollar un sistema de clasificación de
+        enfermedades de hojas de yuca y comparar
+        diferentes estrategias de aprendizaje profundo.
 
-    ### Metodología
+        ## Dataset
 
-    - Partición estratificada de desarrollo y test.
-    - Validación cruzada estratificada de tres folds.
-    - Transfer Learning.
-    - Optimización de hiperparámetros con Hyperband.
-    - Aprendizaje federado mediante FedAvg.
-    - Ensembles heterogéneos mediante Soft Voting.
+        - 21.397 imágenes.
+        - Cinco categorías.
+        - 85 % para desarrollo.
+        - 15 % para evaluación independiente.
+        - Validación cruzada estratificada de tres folds.
 
-    ### Arquitecturas
+        ## Arquitecturas
 
-    - MobileNetV3-Large.
-    - EfficientNet-B0.
-    - ResNet50.
-    - Vision Transformer B/16.
-    - Swin Transformer Tiny.
+        **Redes neuronales convolucionales:**
 
-    ### Limitaciones
+        - MobileNetV3-Large.
+        - EfficientNet-B0.
+        - ResNet50.
 
-    El aprendizaje federado se desarrolla en un
-    entorno simulado.
+        **Transformers:**
 
-    El sistema reconoce cinco clases conocidas y
-    no dispone de un detector de imágenes ajenas
-    al dominio.
+        - ViT-B/16.
+        - Swin-Tiny.
 
-    Las probabilidades no representan certeza
-    diagnóstica y no han sido calibradas.
+        ## Metodología
 
-    """)
+        - Transfer Learning.
+        - Optimización mediante Hyperband.
+        - Feature Caching.
+        - Aprendizaje centralizado.
+        - Aprendizaje federado mediante FedAvg.
+        - Ensemble heterogéneo mediante Soft Voting.
+
+        ## Limitaciones
+
+        - Aprendizaje federado simulado.
+        - Inferencia en CPU en la versión web.
+        - Recursos computacionales limitados.
+        - No incluye detección de imágenes ajenas
+          a las categorías del dataset.
+        - No sustituye el diagnóstico profesional.
+        """
+    )
 
 
-st.title("🌿 Cassava AI")
+# ==========================================================
+# 10. MENÚ LATERAL
+# ==========================================================
 
-st.caption(
+def main():
 
-    "Sistema inteligente de clasificación "
-    "de enfermedades de hojas de yuca"
+    with st.sidebar:
 
-)
+        st.title("🌿 Cassava AI")
 
-st.sidebar.title("Navegación")
+        st.caption(
+            "Inteligencia artificial aplicada "
+            "al sector agrícola"
+        )
 
-page = st.sidebar.radio(
+        st.divider()
 
-    "Seleccionar sección",
+        page = st.radio(
+            "Navegación",
+            options=[
+                "Clasificación",
+                "Resultados experimentales",
+                "Acerca del proyecto",
+            ],
+        )
 
-    [
+        st.divider()
 
-        "Clasificación",
+        st.caption("Dispositivo de inferencia: CPU")
 
-        "Resultados experimentales",
+        st.caption("Versión web del proyecto académico")
 
-        "Acerca del proyecto"
+    if page == "Clasificación":
 
-    ]
+        classification_page()
 
-)
+    elif page == "Resultados experimentales":
 
-st.sidebar.divider()
+        experimental_results_page()
 
-st.sidebar.write(
+    else:
 
-    "Dispositivo disponible:",
+        about_page()
 
-    "CUDA" if torch.cuda.is_available() else "CPU"
 
-)
+if __name__ == "__main__":
 
-if page == "Clasificación":
-
-    classification_page()
-
-elif page == "Resultados experimentales":
-
-    experimental_results_page()
-
-else:
-
-    about_page()
+    main()

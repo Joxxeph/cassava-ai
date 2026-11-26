@@ -69,3 +69,8 @@ desktop.ini
 build/
 dist/
 *.egg-info/
+
+# Clasificadores definitivos para despliegue
+!models/final/final_cached_v1/**/final_classifier.pth
+
+!models/federated/federated_cached_v1/final/**/global_classifier.pth
