@@ -1,0 +1,13 @@
+{
+    "model": "swin_t",
+    "approach": "federated",
+    "evaluation_split": "test",
+    "num_samples": 3210,
+    "inference_seconds": 0.009949800001777476,
+    "accuracy": 0.7361370716510903,
+    "precision_macro": 0.591855668380427,
+    "recall_macro": 0.656333299023914,
+    "f1_macro": 0.6183360870269123,
+    "f1_weighted": 0.7490767051601197,
+    "balanced_accuracy": 0.656333299023914
+}

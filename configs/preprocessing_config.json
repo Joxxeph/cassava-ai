@@ -1,0 +1,41 @@
+{
+    "image_size": [
+        224,
+        224
+    ],
+    "num_channels": 3,
+    "color_mode": "RGB",
+    "exif_transpose": true,
+    "resize": {
+        "interpolation": "bilinear",
+        "antialias": true
+    },
+    "normalization": {
+        "method": "ImageNet",
+        "mean": [
+            0.485,
+            0.456,
+            0.406
+        ],
+        "std": [
+            0.229,
+            0.224,
+            0.225
+        ]
+    },
+    "augmentation": {
+        "horizontal_flip": 0.5,
+        "vertical_flip": 0.5,
+        "rotation_degrees": 15,
+        "rotation_fill": [
+            124,
+            116,
+            104
+        ],
+        "brightness": 0.1,
+        "contrast": 0.1,
+        "saturation": 0.05
+    },
+    "apply_augmentation_to": "train",
+    "seed": 42
+}

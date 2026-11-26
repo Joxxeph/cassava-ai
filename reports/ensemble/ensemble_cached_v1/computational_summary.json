@@ -1,0 +1,10 @@
+{
+    "feature_extraction_seconds": 256.9959983999979,
+    "classifier_inference_seconds": 0.30262510000829934,
+    "soft_voting_seconds": 0.003342500000144355,
+    "cache_size_mib": 72.03367614746094,
+    "actual_image_backbone_passes": 16050,
+    "separate_model_image_backbone_passes": 32100,
+    "backbone_pass_reduction_pct": 50.0,
+    "example_end_to_end_inference_seconds": 7.332208499999979
+}

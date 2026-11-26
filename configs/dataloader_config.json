@@ -1,0 +1,15 @@
+{
+    "batch_size": 32,
+    "num_workers": 0,
+    "seed": 42,
+    "shuffle": {
+        "train": true,
+        "validation": false,
+        "test": false
+    },
+    "drop_last": false,
+    "pin_memory": "auto_cuda",
+    "label_dtype": "int64",
+    "image_dtype": "float32",
+    "tensor_format": "NCHW"
+}

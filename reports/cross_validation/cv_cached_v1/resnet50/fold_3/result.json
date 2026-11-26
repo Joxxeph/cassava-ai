@@ -1,0 +1,22 @@
+{
+    "architecture": "resnet50",
+    "family": "CNN",
+    "fold": 3,
+    "best_epoch": 3,
+    "epochs_completed": 3,
+    "train_images": 12125,
+    "validation_images": 6062,
+    "hyperparameter_source": "baseline_feature_extraction",
+    "accuracy": 0.7035631804684922,
+    "precision_macro": 0.5671284678282709,
+    "recall_macro": 0.6240338644835958,
+    "f1_macro": 0.5873576017640417,
+    "f1_weighted": 0.7208730419775116,
+    "balanced_accuracy": 0.6240338644835958,
+    "loss": 0.9763023435238523,
+    "seconds": 0.18822590000127093,
+    "num_samples": 6062,
+    "total_seconds": 4.254253000002791,
+    "total_minutes": 0.07090421666671318,
+    "status": "success"
+}

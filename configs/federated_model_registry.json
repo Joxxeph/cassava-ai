@@ -1,0 +1,68 @@
+{
+    "run_id": "federated_cached_v1",
+    "approach": "federated",
+    "algorithm": "FedAvg",
+    "simulation": true,
+    "training_mode": "cached_federated_feature_extraction",
+    "num_servers": 1,
+    "num_clients": 2,
+    "rounds": 3,
+    "local_epochs": 1,
+    "num_models": 5,
+    "num_classes": 5,
+    "class_mapping": {
+        "bacterial_blight": 0,
+        "brown_streak_disease": 1,
+        "green_mottle": 2,
+        "healthy": 3,
+        "mosaic_disease": 4
+    },
+    "image_size": [
+        224,
+        224
+    ],
+    "preprocessing_config": "configs/preprocessing_config.json",
+    "test_evaluation_pending": true,
+    "models": {
+        "mobilenet_v3_large": {
+            "model_path": "models\\federated\\federated_cached_v1\\final\\mobilenet_v3_large\\federated_model.pth",
+            "classifier_path": "models\\federated\\federated_cached_v1\\final\\mobilenet_v3_large\\global_classifier.pth",
+            "feature_dim": 960,
+            "dropout": 0.062397808134481064,
+            "rounds": 3,
+            "local_epochs": 1
+        },
+        "efficientnet_b0": {
+            "model_path": "models\\federated\\federated_cached_v1\\final\\efficientnet_b0\\federated_model.pth",
+            "classifier_path": "models\\federated\\federated_cached_v1\\final\\efficientnet_b0\\global_classifier.pth",
+            "feature_dim": 1280,
+            "dropout": 0.2,
+            "rounds": 3,
+            "local_epochs": 1
+        },
+        "resnet50": {
+            "model_path": "models\\federated\\federated_cached_v1\\final\\resnet50\\federated_model.pth",
+            "classifier_path": "models\\federated\\federated_cached_v1\\final\\resnet50\\global_classifier.pth",
+            "feature_dim": 2048,
+            "dropout": 0.2,
+            "rounds": 3,
+            "local_epochs": 1
+        },
+        "vit_b_16": {
+            "model_path": "models\\federated\\federated_cached_v1\\final\\vit_b_16\\federated_model.pth",
+            "classifier_path": "models\\federated\\federated_cached_v1\\final\\vit_b_16\\global_classifier.pth",
+            "feature_dim": 768,
+            "dropout": 0.2,
+            "rounds": 3,
+            "local_epochs": 1
+        },
+        "swin_t": {
+            "model_path": "models\\federated\\federated_cached_v1\\final\\swin_t\\federated_model.pth",
+            "classifier_path": "models\\federated\\federated_cached_v1\\final\\swin_t\\global_classifier.pth",
+            "feature_dim": 768,
+            "dropout": 0.2,
+            "rounds": 3,
+            "local_epochs": 1
+        }
+    }
+}

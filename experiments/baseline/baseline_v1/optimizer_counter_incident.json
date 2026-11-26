@@ -1,0 +1,39 @@
+{
+    "incident_id": "BASELINE_001",
+    "timestamp": "2026-11-25T19:33:17.578468",
+    "phase": "phase_2_part_4",
+    "experiment": "baseline",
+    "run_id": "baseline_v1",
+    "description": "Contabilización redundante de las actualizaciones del optimizador en versiones anteriores del pipeline.",
+    "affected_architectures": [
+        "mobilenet_v3_large",
+        "efficientnet_b0",
+        "resnet50",
+        "vit_b_16"
+    ],
+    "affected_epochs": 18,
+    "total_epochs": 25,
+    "verification": {
+        "method": "AdamW internal parameter step counters",
+        "checkpoints_audited": 10,
+        "valid_checkpoints": 10,
+        "epochs_covered": 25,
+        "expected_optimizer_steps": 9475,
+        "verified_optimizer_steps": 9475,
+        "verified_skipped_steps": 0
+    },
+    "resolution": {
+        "original_reports_preserved": true,
+        "verified_report_generated": true,
+        "counter_validation_added": true,
+        "model_weights_modified": false,
+        "retraining_required_for_incident": false,
+        "exact_historical_cause_verified": false
+    },
+    "limitations": [
+        "Los contadores internos verifican la cantidad de actualizaciones, no toda la trayectoria de entrenamiento.",
+        "Los tiempos computacionales no son estrictamente comparables debido a los cambios en el diagnóstico.",
+        "La recuperación de ViT no garantiza reproducibilidad exacta bit a bit."
+    ],
+    "status": "resolved_for_baseline"
+}

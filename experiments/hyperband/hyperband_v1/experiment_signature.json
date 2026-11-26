@@ -1,0 +1,22 @@
+{
+    "configs\\dataset_config.json": "ffd81b9e384698d9854e239621969203104401ce8080902dfdae6dfab039190a",
+    "configs\\preprocessing_config.json": "da71c07df2c0f8fb334a42b9efd1a5ca68782fe2718937df8584c302fc9bacfc",
+    "configs\\training_config.json": "a4504ef9a7e89d97800d11a8914a288c43994ad0791bc87a245dca04f7499532",
+    "configs\\model_config.json": "1f6b204534a4d709af9f0d24fbc685aec0463ef8e51b537c0e9bedba4ea7111d",
+    "configs\\pipeline_config.json": "c32c3ac270c641b1dc119e37437c5653cf0a7bbef98229a57e584fa402f8713c",
+    "configs\\baseline_config.json": "5f8576a9803c8b39ce7b860d98160013fd9c957a8a951b478b74ceffd7854103",
+    "configs\\hyperband_config.json": "7af3bd02efeef00585615c8ecee45c20c0dd77d76bd0cd3312fb004f12198054",
+    "configs\\search_space.json": "0b1380309015252fa6c01fc1961cb1fad46ba57f16bcbe5371e01183aad0e55d",
+    "reports\\dataset_splits.csv": "21d5f7c006c38fecead271b56c0bf68e4938cdde24deeecc9042495535bf5373",
+    "reports\\baseline\\baseline_v1\\baseline_results_verified.csv": "dbc4277e43df09bd5310d796f0a99e3712d226b81fb9817a70fd5b320912cfda",
+    "src\\optimization.py": "e11cc709a5d36f9b1ce56d444ace6da6954c8b9900a10ac79a01f757c90d2348",
+    "src\\trainer.py": "7aa16d797ea4a0c1e14d35b4d3ee6d07a5642d61bc905e4586b73cad7a1455c1",
+    "src\\model_factory.py": "0e3d3cd0b0f4a095dcfef87a090bda6ce89d077377aaf49d9f6dd33b76635757",
+    "src\\metrics.py": "70f6f2abd26a27dabf6f221aa73e3d900e561126c8b83aa1f9f1a23d2cfeeb81",
+    "src\\preprocessing.py": "7c114a9c207df09bd3017f5d039e536bae1699381f48ee1a65985ae0e096ae44",
+    "src\\dataset.py": "1e3ffed96d496cdf87c997683933fc04f7edc632a2fc6d65d4284e90cf9cd9d4",
+    "src\\data_generator.py": "6cc0d16b49d1cb59c9b214bf658bba58edda356a103c2d3bf03b488029de9aa9",
+    "src\\utils.py": "ef8c9a1570a650c440ac38907980bef242f8a386c429fdd1655ee90d6441d80f",
+    "models\\baseline\\baseline_v1\\vit_b_16\\feature_extraction\\best.pth": "b9147ed6b6aaecf4f97c19d7fad26a0fc6381bd93e1974ee5900f3653e43475b",
+    "models\\baseline\\baseline_v1\\swin_t\\feature_extraction\\best.pth": "710be24945f83343e0519d050c1d05c769ba4d9bedb1b5ff0ca5552b6c083661"
+}

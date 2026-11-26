@@ -1,0 +1,6 @@
+﻿class,class_id,training_images,class_weight
+bacterial_blight,0,924,3.936580181121826
+brown_streak_disease,1,1861,1.9545406103134155
+green_mottle,2,2028,1.79358971118927
+healthy,3,2190,1.6609132289886475
+mosaic_disease,4,11184,0.32523247599601746

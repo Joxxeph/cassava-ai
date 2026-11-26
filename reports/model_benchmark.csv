@@ -1,0 +1,6 @@
+﻿architecture,mode,batch_size,mixed_precision,seconds_per_batch,images_per_second,peak_memory_mib,reserved_memory_mib,status
+mobilenet_v3_large,feature_extraction,16,True,0.013493149999703746,1185.7868622487183,153.97412109375,198.0,success
+efficientnet_b0,feature_extraction,16,True,0.018913899999461137,845.9387011909678,168.41357421875,218.0,success
+resnet50,feature_extraction,8,True,0.020963999995728955,381.6065637106401,201.6728515625,246.0,success
+vit_b_16,feature_extraction,4,True,0.0830109500020626,48.186413959852416,417.072265625,468.0,success
+swin_t,feature_extraction,4,True,0.018876450005336665,211.90425100424804,215.91943359375,240.0,success

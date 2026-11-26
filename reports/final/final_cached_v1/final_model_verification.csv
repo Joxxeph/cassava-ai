@@ -1,0 +1,6 @@
+﻿architecture,samples_verified,max_probability_difference,prediction_agreement,probabilities_close,checkpoint_load_success
+mobilenet_v3_large,8,0.0011040568351745605,1.0,True,True
+efficientnet_b0,8,0.0005985796451568604,1.0,True,True
+resnet50,8,0.0007556676864624023,1.0,True,True
+vit_b_16,8,0.0003412961959838867,1.0,True,True
+swin_t,8,0.0005487203598022461,1.0,True,True

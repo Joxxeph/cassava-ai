@@ -1,0 +1,6 @@
+﻿architecture,checkpoint_size_mib,output_shape,status
+swin_t,105.26743602752686,"(1, 5)",success
+vit_b_16,327.35919761657715,"(1, 5)",success
+mobilenet_v3_large,16.237585067749023,"(1, 5)",success
+resnet50,90.01142692565918,"(1, 5)",success
+efficientnet_b0,15.579793930053711,"(1, 5)",success

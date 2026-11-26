@@ -1,0 +1,40 @@
+{
+    "experiment_name": "heterogeneous_ensemble",
+    "run_id": "ensemble_cached_v1",
+    "method": "soft_voting",
+    "aggregation": "arithmetic_mean",
+    "num_models_per_ensemble": 5,
+    "architectures": [
+        "mobilenet_v3_large",
+        "efficientnet_b0",
+        "resnet50",
+        "vit_b_16",
+        "swin_t"
+    ],
+    "num_classes": 5,
+    "class_mapping": {
+        "bacterial_blight": 0,
+        "brown_streak_disease": 1,
+        "green_mottle": 2,
+        "healthy": 3,
+        "mosaic_disease": 4
+    },
+    "weights": {
+        "mobilenet_v3_large": 0.2,
+        "efficientnet_b0": 0.2,
+        "resnet50": 0.2,
+        "vit_b_16": 0.2,
+        "swin_t": 0.2
+    },
+    "centralized_registry": "configs/centralized_model_registry.json",
+    "federated_registry": "configs/federated_model_registry.json",
+    "ensembles": [
+        "centralized",
+        "federated"
+    ],
+    "evaluation_split": "test",
+    "feature_caching": true,
+    "test_feature_cache_dir": "dataset/cache/test_features_v1",
+    "optimize_ensemble_weights": false,
+    "test_used_for_model_selection": false
+}

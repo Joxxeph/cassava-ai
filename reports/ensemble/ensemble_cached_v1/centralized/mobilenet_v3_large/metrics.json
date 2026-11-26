@@ -1,0 +1,13 @@
+{
+    "model": "mobilenet_v3_large",
+    "approach": "centralized",
+    "evaluation_split": "test",
+    "num_samples": 3210,
+    "inference_seconds": 0.10553639999852749,
+    "accuracy": 0.7137071651090343,
+    "precision_macro": 0.5577991877676456,
+    "recall_macro": 0.6298120276753566,
+    "f1_macro": 0.5805647875573884,
+    "f1_weighted": 0.7303509597040435,
+    "balanced_accuracy": 0.6298120276753566
+}

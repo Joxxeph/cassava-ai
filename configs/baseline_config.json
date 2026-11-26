@@ -1,0 +1,54 @@
+{
+    "experiment_name": "baseline",
+    "run_id": "baseline_v1",
+    "seed": 42,
+    "validation_fold": 1,
+    "architectures": [
+        "mobilenet_v3_large",
+        "efficientnet_b0",
+        "resnet50",
+        "vit_b_16",
+        "swin_t"
+    ],
+    "pretrained": true,
+    "dropout": 0.2,
+    "weight_decay": 0.0001,
+    "num_workers": 0,
+    "effective_batch_size": 32,
+    "mixed_precision": true,
+    "amp": {
+        "dtype": "float16",
+        "init_scale": 1024.0,
+        "growth_factor": 2.0,
+        "backoff_factor": 0.5,
+        "growth_interval": 2000
+    },
+    "feature_extraction": {
+        "epochs": 3,
+        "classifier_lr": 0.001
+    },
+    "partial_finetuning": {
+        "epochs": 2,
+        "classifier_lr": 0.0001,
+        "backbone_lr": 1e-05
+    },
+    "scheduler": {
+        "name": "ReduceLROnPlateau",
+        "factor": 0.5,
+        "patience": 1,
+        "min_lr": 1e-07
+    },
+    "early_stopping": {
+        "patience": 3,
+        "min_delta": 0.0
+    },
+    "loss": {
+        "name": "WeightedCrossEntropyLoss",
+        "weight_method": "balanced",
+        "reduction": "sum",
+        "weights_source": "training_fold"
+    },
+    "selection_metric": "f1_macro",
+    "remove_last_checkpoints": true,
+    "test_reserved": true
+}

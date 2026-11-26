@@ -1,0 +1,6 @@
+﻿architecture,shape,dtype,valid
+mobilenet_v3_large,"(18187, 960)",torch.float32,True
+efficientnet_b0,"(18187, 1280)",torch.float32,True
+resnet50,"(18187, 2048)",torch.float32,True
+vit_b_16,"(18187, 768)",torch.float32,True
+swin_t,"(18187, 768)",torch.float32,True

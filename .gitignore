@@ -1,0 +1,71 @@
+# ==========================================
+# Cassava AI - Git Ignore
+# ==========================================
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Dataset original
+dataset/raw/
+
+# Caracteristicas precalculadas
+dataset/cache/
+
+# Checkpoints y modelos pesados
+*.pth
+*.pt
+*.ckpt
+*.onnx
+*.safetensors
+
+# TensorBoard
+events.out.tfevents*
+
+# Archivos temporales
+*.tmp
+*.log
+*.bak
+
+# Bases de datos locales
+*.db
+*.sqlite
+*.sqlite3
+*.db-wal
+*.db-shm
+
+# Variables de entorno y credenciales
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+credentials.json
+
+# Visual Studio Code
+.vscode/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos comprimidos
+*.zip
+*.rar
+*.7z
+
+# Distribuciones Python
+build/
+dist/
+*.egg-info/

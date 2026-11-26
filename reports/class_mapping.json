@@ -1,0 +1,7 @@
+{
+    "bacterial_blight": 0,
+    "brown_streak_disease": 1,
+    "green_mottle": 2,
+    "healthy": 3,
+    "mosaic_disease": 4
+}

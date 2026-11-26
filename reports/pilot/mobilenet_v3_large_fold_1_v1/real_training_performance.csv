@@ -1,0 +1,3 @@
+﻿architecture,mode,batch_size,mean_train_seconds,mean_val_seconds,mean_epoch_minutes,images_per_second
+mobilenet_v3_large,feature_extraction,16,175.1610088666639,67.52013816667022,4.0447296488889455,69.21631748095852
+mobilenet_v3_large,partial_finetuning,16,191.32917995000025,74.87659205000091,4.436811379166708,63.36722920763234

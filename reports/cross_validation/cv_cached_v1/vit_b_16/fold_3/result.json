@@ -1,0 +1,22 @@
+{
+    "architecture": "vit_b_16",
+    "family": "Transformer",
+    "fold": 3,
+    "best_epoch": 3,
+    "epochs_completed": 3,
+    "train_images": 12125,
+    "validation_images": 6062,
+    "hyperparameter_source": "baseline_feature_extraction",
+    "accuracy": 0.6801385681293303,
+    "precision_macro": 0.5595167772866648,
+    "recall_macro": 0.6339061767271275,
+    "f1_macro": 0.580731494047863,
+    "f1_weighted": 0.7036180964677967,
+    "balanced_accuracy": 0.6339061767271275,
+    "loss": 0.9324412348857977,
+    "seconds": 0.13082740000027115,
+    "num_samples": 6062,
+    "total_seconds": 3.559070100000099,
+    "total_minutes": 0.05931783500000165,
+    "status": "success"
+}

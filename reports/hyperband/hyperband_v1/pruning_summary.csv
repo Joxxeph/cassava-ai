@@ -1,0 +1,6 @@
+﻿architecture,finished_trials,max_possible_epochs,executed_epochs,saved_epochs,resource_saving_pct
+mobilenet_v3_large,6,18,10,8,44.44444444444444
+efficientnet_b0,3,9,7,2,22.22222222222222
+resnet50,3,9,7,2,22.22222222222222
+vit_b_16,3,9,9,0,0.0
+swin_t,3,9,7,2,22.22222222222222

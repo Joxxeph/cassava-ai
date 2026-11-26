@@ -1,0 +1,14 @@
+﻿artifact,path,exists
+dataset_splits,reports\dataset_splits.csv,True
+federated_splits,reports\federated_splits.csv,True
+dataset_config,configs\dataset_config.json,True
+preprocessing_config,configs\preprocessing_config.json,True
+centralized_registry,configs\centralized_model_registry.json,True
+federated_registry,configs\federated_model_registry.json,True
+ensemble_registry,configs\ensemble_model_registry.json,True
+inference_config,configs\inference_config.json,True
+final_test_results,reports\ensemble\ensemble_cached_v1\all_test_results.csv,True
+ensemble_improvements,reports\ensemble\ensemble_cached_v1\ensemble_improvements.csv,True
+class_level_results,reports\ensemble\ensemble_cached_v1\class_level_results.csv,True
+computational_summary,reports\ensemble\ensemble_cached_v1\computational_summary.json,True
+ensemble_summary,experiments\ensemble\ensemble_cached_v1\ensemble_summary.json,True

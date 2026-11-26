@@ -1,0 +1,22 @@
+{
+    "architecture": "efficientnet_b0",
+    "family": "CNN",
+    "fold": 1,
+    "best_epoch": 3,
+    "epochs_completed": 3,
+    "train_images": 12124,
+    "validation_images": 6063,
+    "hyperparameter_source": "baseline_feature_extraction",
+    "accuracy": 0.7187860794985981,
+    "precision_macro": 0.5712306160955831,
+    "recall_macro": 0.6294048822159712,
+    "f1_macro": 0.5867977682066069,
+    "f1_weighted": 0.7323679745615396,
+    "balanced_accuracy": 0.6294048822159712,
+    "loss": 0.9626383863329362,
+    "seconds": 0.14413039999999455,
+    "num_samples": 6063,
+    "total_seconds": 3.443451899998763,
+    "total_minutes": 0.057390864999979384,
+    "status": "success"
+}

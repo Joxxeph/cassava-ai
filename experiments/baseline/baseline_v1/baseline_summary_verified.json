@@ -1,0 +1,19 @@
+{
+    "phase": "phase_2_part_4",
+    "experiment": "baseline",
+    "status": "completed_verified",
+    "architectures_completed": 5,
+    "cnn_architectures": 3,
+    "transformer_architectures": 2,
+    "total_epochs": 25,
+    "optimizer_checkpoints_verified": 10,
+    "expected_optimizer_steps": 9475,
+    "verified_optimizer_steps": 9475,
+    "verified_skipped_steps": 0,
+    "best_architecture": "swin_t",
+    "best_f1_macro": 0.632792340867123,
+    "total_minutes": 234.61850345000033,
+    "test_used": false,
+    "incident_documented": true,
+    "retraining_required_for_incident": false
+}

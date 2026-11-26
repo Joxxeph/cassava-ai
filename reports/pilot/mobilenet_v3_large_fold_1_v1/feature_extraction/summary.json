@@ -1,0 +1,37 @@
+{
+    "architecture": "mobilenet_v3_large",
+    "best_epoch": 3,
+    "best_f1_macro": 0.5724000496913045,
+    "epochs_completed": 3,
+    "total_seconds": 728.0513368000102,
+    "early_stopping": false,
+    "metadata": {
+        "experiment": "pipeline_pilot",
+        "architecture": "mobilenet_v3_large",
+        "fold": 1,
+        "seed": 42,
+        "class_mapping": {
+            "bacterial_blight": 0,
+            "brown_streak_disease": 1,
+            "green_mottle": 2,
+            "healthy": 3,
+            "mosaic_disease": 4
+        },
+        "batch_size": 16,
+        "dropout": 0.2,
+        "pretrained_weights": "MobileNet_V3_Large_Weights.IMAGENET1K_V2",
+        "class_weights": [
+            3.936363697052002,
+            1.9554839134216309,
+            1.7934911251068115,
+            1.6608219146728516,
+            0.32521459460258484
+        ],
+        "train_images": 12124,
+        "validation_images": 6063,
+        "training_mode": "feature_extraction",
+        "num_classes": 5,
+        "accumulation_steps": 2,
+        "mixed_precision": true
+    }
+}

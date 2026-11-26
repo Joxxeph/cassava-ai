@@ -1,0 +1,7 @@
+﻿fold,client_id,training_images,global_validation_images
+1,1,6062,6063
+1,2,6062,6063
+2,1,6062,6062
+2,2,6063,6062
+3,1,6062,6062
+3,2,6063,6062

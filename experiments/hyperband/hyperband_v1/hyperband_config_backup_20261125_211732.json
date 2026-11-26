@@ -1,0 +1,56 @@
+{
+    "experiment_name": "hyperband_optimization",
+    "run_id": "hyperband_v1",
+    "framework": "Optuna",
+    "sampler": "RandomSampler",
+    "pruner": "HyperbandPruner",
+    "direction": "maximize",
+    "objective_metric": "f1_macro",
+    "seed": 42,
+    "validation_fold": 1,
+    "n_trials": 6,
+    "min_resource": 1,
+    "max_resource": 3,
+    "reduction_factor": 3,
+    "architectures": [
+        "mobilenet_v3_large",
+        "efficientnet_b0",
+        "resnet50",
+        "vit_b_16",
+        "swin_t"
+    ],
+    "architecture_stages": {
+        "mobilenet_v3_large": "feature_extraction",
+        "efficientnet_b0": "feature_extraction",
+        "resnet50": "feature_extraction",
+        "vit_b_16": "partial_finetuning",
+        "swin_t": "partial_finetuning"
+    },
+    "default_dropout": 0.2,
+    "effective_batch_size": 32,
+    "num_workers": 0,
+    "mixed_precision": true,
+    "amp": {
+        "dtype": "float16",
+        "init_scale": 1024.0,
+        "growth_factor": 2.0,
+        "backoff_factor": 0.5,
+        "growth_interval": 2000
+    },
+    "scheduler": {
+        "name": "ReduceLROnPlateau",
+        "factor": 0.5,
+        "patience": 1,
+        "min_lr": 1e-07
+    },
+    "loss": {
+        "name": "WeightedCrossEntropyLoss",
+        "weight_method": "balanced",
+        "reduction": "sum",
+        "weights_source": "training_fold"
+    },
+    "storage": "SQLite",
+    "baseline_run_id": "baseline_v1",
+    "save_trial_checkpoints": false,
+    "test_reserved": true
+}

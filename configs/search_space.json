@@ -1,0 +1,35 @@
+{
+    "feature_extraction": {
+        "classifier_lr": {
+            "low": 0.0001,
+            "high": 0.003,
+            "log": true
+        },
+        "weight_decay": {
+            "low": 1e-06,
+            "high": 0.001,
+            "log": true
+        },
+        "dropout": {
+            "low": 0.0,
+            "high": 0.4
+        }
+    },
+    "partial_finetuning": {
+        "classifier_lr": {
+            "low": 3e-05,
+            "high": 0.001,
+            "log": true
+        },
+        "backbone_lr": {
+            "low": 1e-06,
+            "high": 3e-05,
+            "log": true
+        },
+        "weight_decay": {
+            "low": 1e-06,
+            "high": 0.001,
+            "log": true
+        }
+    }
+}

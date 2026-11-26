@@ -1,0 +1,3 @@
+﻿stage,architecture,best_epoch,best_f1_macro,epochs_completed,total_seconds,early_stopping
+feature_extraction,mobilenet_v3_large,3,0.5724000496913045,3,728.0513368000102,False
+partial_finetuning,mobilenet_v3_large,2,0.5462583387069616,2,532.417365500005,False

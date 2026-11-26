@@ -1,0 +1,61 @@
+{
+    "framework": "PyTorch",
+    "architecture_provider": "Torchvision",
+    "num_classes": 5,
+    "class_mapping": {
+        "bacterial_blight": 0,
+        "brown_streak_disease": 1,
+        "green_mottle": 2,
+        "healthy": 3,
+        "mosaic_disease": 4
+    },
+    "image_size": [
+        224,
+        224
+    ],
+    "pretrained": true,
+    "default_dropout": 0.2,
+    "default_training_mode": "feature_extraction",
+    "available_training_modes": [
+        "feature_extraction",
+        "partial_finetuning",
+        "full_finetuning"
+    ],
+    "output": {
+        "type": "logits",
+        "num_outputs": 5,
+        "softmax_in_model": false
+    },
+    "architectures": {
+        "mobilenet_v3_large": {
+            "family": "CNN",
+            "weights": "MobileNet_V3_Large_Weights.IMAGENET1K_V2",
+            "batch_size": 16,
+            "gradient_accumulation_steps": 2
+        },
+        "efficientnet_b0": {
+            "family": "CNN",
+            "weights": "EfficientNet_B0_Weights.IMAGENET1K_V1",
+            "batch_size": 16,
+            "gradient_accumulation_steps": 2
+        },
+        "resnet50": {
+            "family": "CNN",
+            "weights": "ResNet50_Weights.IMAGENET1K_V2",
+            "batch_size": 8,
+            "gradient_accumulation_steps": 4
+        },
+        "vit_b_16": {
+            "family": "Transformer",
+            "weights": "ViT_B_16_Weights.IMAGENET1K_V1",
+            "batch_size": 4,
+            "gradient_accumulation_steps": 8
+        },
+        "swin_t": {
+            "family": "Transformer",
+            "weights": "Swin_T_Weights.IMAGENET1K_V1",
+            "batch_size": 4,
+            "gradient_accumulation_steps": 8
+        }
+    }
+}

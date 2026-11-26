@@ -1,0 +1,137 @@
+{
+    "mobilenet_v3_large": {
+        "source": "hyperband",
+        "selected_stage": "feature_extraction",
+        "baseline_f1_macro": 0.5729563773258665,
+        "hyperband_f1_macro": 0.5782121416987023,
+        "selected_f1_macro": 0.5782121416987023,
+        "optimization_fold": 1,
+        "training_config": {
+            "feature_extraction": {
+                "epochs": 3,
+                "classifier_lr": 0.0007661100707771367,
+                "weight_decay": 2.9380279387035354e-06,
+                "dropout": 0.062397808134481064
+            },
+            "partial_finetuning": {
+                "epochs": 2,
+                "classifier_lr": 0.0001,
+                "backbone_lr": 1e-05,
+                "weight_decay": 0.0001,
+                "dropout": 0.2
+            }
+        },
+        "model_settings": {
+            "batch_size": 16,
+            "gradient_accumulation_steps": 2
+        }
+    },
+    "efficientnet_b0": {
+        "source": "baseline",
+        "selected_stage": "feature_extraction",
+        "baseline_f1_macro": 0.5525949727690953,
+        "hyperband_f1_macro": 0.5149020098649071,
+        "selected_f1_macro": 0.5525949727690953,
+        "optimization_fold": 1,
+        "training_config": {
+            "feature_extraction": {
+                "epochs": 3,
+                "classifier_lr": 0.001,
+                "weight_decay": 0.0001,
+                "dropout": 0.2
+            },
+            "partial_finetuning": {
+                "epochs": 2,
+                "classifier_lr": 0.0001,
+                "backbone_lr": 1e-05,
+                "weight_decay": 0.0001,
+                "dropout": 0.2
+            }
+        },
+        "model_settings": {
+            "batch_size": 16,
+            "gradient_accumulation_steps": 2
+        }
+    },
+    "resnet50": {
+        "source": "baseline",
+        "selected_stage": "feature_extraction",
+        "baseline_f1_macro": 0.5598914928568188,
+        "hyperband_f1_macro": 0.5598914928568188,
+        "selected_f1_macro": 0.5598914928568188,
+        "optimization_fold": 1,
+        "training_config": {
+            "feature_extraction": {
+                "epochs": 3,
+                "classifier_lr": 0.001,
+                "weight_decay": 0.0001,
+                "dropout": 0.2
+            },
+            "partial_finetuning": {
+                "epochs": 2,
+                "classifier_lr": 0.0001,
+                "backbone_lr": 1e-05,
+                "weight_decay": 0.0001,
+                "dropout": 0.2
+            }
+        },
+        "model_settings": {
+            "batch_size": 8,
+            "gradient_accumulation_steps": 4
+        }
+    },
+    "vit_b_16": {
+        "source": "hyperband",
+        "selected_stage": "partial_finetuning",
+        "baseline_f1_macro": 0.6028321529319166,
+        "hyperband_f1_macro": 0.6121452215277001,
+        "selected_f1_macro": 0.6121452215277001,
+        "optimization_fold": 1,
+        "training_config": {
+            "feature_extraction": {
+                "epochs": 3,
+                "classifier_lr": 0.001,
+                "weight_decay": 0.0001,
+                "dropout": 0.2
+            },
+            "partial_finetuning": {
+                "epochs": 3,
+                "classifier_lr": 0.0001,
+                "backbone_lr": 1e-05,
+                "weight_decay": 0.0001,
+                "dropout": 0.2
+            }
+        },
+        "model_settings": {
+            "batch_size": 4,
+            "gradient_accumulation_steps": 8
+        }
+    },
+    "swin_t": {
+        "source": "hyperband",
+        "selected_stage": "partial_finetuning",
+        "baseline_f1_macro": 0.632792340867123,
+        "hyperband_f1_macro": 0.6702327779997072,
+        "selected_f1_macro": 0.6702327779997072,
+        "optimization_fold": 1,
+        "training_config": {
+            "feature_extraction": {
+                "epochs": 3,
+                "classifier_lr": 0.001,
+                "weight_decay": 0.0001,
+                "dropout": 0.2
+            },
+            "partial_finetuning": {
+                "epochs": 3,
+                "classifier_lr": 0.00011155792840695785,
+                "backbone_lr": 1.2057126287443764e-05,
+                "weight_decay": 0.0007114476009343421,
+                "dropout": 0.2
+            }
+        },
+        "model_settings": {
+            "batch_size": 4,
+            "gradient_accumulation_steps": 8
+        }
+    }
+}

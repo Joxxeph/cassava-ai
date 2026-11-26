@@ -1,0 +1,25 @@
+{
+    "architecture": "swin_t",
+    "epochs_completed": 3,
+    "training_images": 18187,
+    "hyperparameter_source": "baseline_feature_extraction",
+    "final_train_loss": 0.8784839173317129,
+    "final_train_f1_macro": 0.6108341975848572,
+    "optimizer_steps": 1707,
+    "total_parameters": 27523199,
+    "classifier_parameters": 3845,
+    "training_seconds": 4.11342059999879,
+    "total_seconds": 7.049695800000336,
+    "total_minutes": 0.1174949300000056,
+    "classifier_path": "C:\\Users\\Joseph (YO)\\JGM\\U\\Semestre_10\\InteligenciaArtificial\\Proyecto_Yuca\\models\\final\\final_cached_v1\\swin_t\\final_classifier.pth",
+    "model_path": "C:\\Users\\Joseph (YO)\\JGM\\U\\Semestre_10\\InteligenciaArtificial\\Proyecto_Yuca\\models\\final\\final_cached_v1\\swin_t\\final_model.pth",
+    "model_size_mib": 105.2678108215332,
+    "artifact_hashes": {
+        "final_classifier.pth": "f2dacef157545d66cdb4bd2027d392072783fd0446df746bdc28834d4c77dd3d",
+        "final_model.pth": "2680f48421c8e381d7d237ac0283105e0a83c83a8e3bcf8f36820fdb7c1c0140",
+        "history.csv": "622263d68183ba99eeb5c232020bada4a7a042ecb521a6d3790ff88d3ecaa047"
+    },
+    "checkpoint_verified": true,
+    "test_used": false,
+    "status": "success"
+}

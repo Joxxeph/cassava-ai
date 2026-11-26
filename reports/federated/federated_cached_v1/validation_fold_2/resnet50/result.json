@@ -1,0 +1,31 @@
+{
+    "architecture": "resnet50",
+    "stage": "validation",
+    "validation_fold": 2,
+    "rounds_completed": 3,
+    "local_epochs_completed": 6,
+    "training_images": 12125,
+    "validation_images": 6062,
+    "optimizer_steps": 1140,
+    "classifier_path": "C:\\Users\\Joseph (YO)\\JGM\\U\\Semestre_10\\InteligenciaArtificial\\Proyecto_Yuca\\models\\federated\\federated_cached_v1\\validation_fold_2\\resnet50\\global_classifier.pth",
+    "model_path": null,
+    "total_seconds": 6.729480300000432,
+    "total_minutes": 0.11215800500000721,
+    "test_used": false,
+    "artifact_hashes": {
+        "global_classifier.pth": "db8454583ff00944e7e1e5c30732a5263e74b18f90be5dcc84688192003f9abc",
+        "local_history.csv": "11a493233b99eeeff3093662ccdc63ad90a1c620609da1bd45193e2d42678d23",
+        "round_history.csv": "2324568e8e290abc1e4167d657323ab9e2ad90be1c790d1a40fc16b77f5badcf",
+        "validation_predictions.csv": "6f2948f19b695ff8907831469261588c42b5805a31247d35fc25c14375e12b15"
+    },
+    "accuracy": 0.684757505773672,
+    "precision_macro": 0.5369389031194155,
+    "recall_macro": 0.6044211013053113,
+    "f1_macro": 0.5595611385311204,
+    "f1_weighted": 0.7051808947490912,
+    "balanced_accuracy": 0.6044211013053113,
+    "loss": 1.0150403889665178,
+    "seconds": 0.20688999999765656,
+    "num_samples": 6062,
+    "status": "success"
+}

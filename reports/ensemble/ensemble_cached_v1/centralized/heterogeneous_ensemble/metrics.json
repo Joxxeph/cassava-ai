@@ -1,0 +1,13 @@
+{
+    "model": "heterogeneous_ensemble",
+    "approach": "centralized",
+    "evaluation_split": "test",
+    "num_samples": 3210,
+    "inference_seconds": 0.0016142000022227876,
+    "accuracy": 0.7700934579439253,
+    "precision_macro": 0.6273007993178168,
+    "recall_macro": 0.6982933629407455,
+    "f1_macro": 0.6548510176536672,
+    "f1_weighted": 0.779910306434988,
+    "balanced_accuracy": 0.6982933629407455
+}

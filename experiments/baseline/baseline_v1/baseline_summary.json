@@ -1,0 +1,21 @@
+{
+    "experiment": "baseline",
+    "run_id": "baseline_v1",
+    "seed": 42,
+    "fold": 1,
+    "architectures_expected": 5,
+    "architectures_completed": 5,
+    "train_images": 12124,
+    "validation_images": 6063,
+    "test_images": 3210,
+    "test_used_for_training": false,
+    "test_used_for_evaluation": false,
+    "selection_metric": "f1_macro",
+    "best_architecture": "swin_t",
+    "best_f1_macro": 0.632792340867123,
+    "mean_f1_macro": 0.584213467350164,
+    "total_epochs": 25,
+    "total_training_minutes": 234.61850345000033,
+    "amp_warning_epochs": 0,
+    "status": "success"
+}

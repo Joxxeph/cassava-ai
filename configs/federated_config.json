@@ -1,0 +1,31 @@
+{
+    "algorithm": "FedAvg",
+    "simulation": true,
+    "num_servers": 1,
+    "num_clients": 2,
+    "architecture": "centralized_federated",
+    "distribution": {
+        "type": "IID",
+        "method": "stratified_class_fold",
+        "fixed_client_assignment": true,
+        "seed": 42
+    },
+    "cross_validation": {
+        "n_splits": 3,
+        "validation": "global"
+    },
+    "test": {
+        "excluded_from_clients": true,
+        "client_id": -1
+    },
+    "statistics": {
+        "total_images": 21397,
+        "federated_images": 18187,
+        "test_images": 3210,
+        "num_classes": 5
+    },
+    "files": {
+        "original_splits": "reports/dataset_splits.csv",
+        "federated_splits": "reports/federated_splits.csv"
+    }
+}

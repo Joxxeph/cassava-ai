@@ -1,0 +1,7 @@
+﻿model,repetition,seconds
+mobilenet_v3_large,1,0.7098264000014751
+mobilenet_v3_large,2,0.026374399996711873
+mobilenet_v3_large,3,0.031461799997487105
+ensemble,1,7.794885700001032
+ensemble,2,6.955842800001847
+ensemble,3,6.80633189999935

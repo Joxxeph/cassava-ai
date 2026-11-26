@@ -1,0 +1,80 @@
+{
+    "experiment_name": "cached_federated_training",
+    "run_id": "federated_cached_v1",
+    "seed": 42,
+    "architectures": [
+        "mobilenet_v3_large",
+        "efficientnet_b0",
+        "resnet50",
+        "vit_b_16",
+        "swin_t"
+    ],
+    "algorithm": "FedAvg",
+    "simulation": true,
+    "num_servers": 1,
+    "num_clients": 2,
+    "client_ids": [
+        1,
+        2
+    ],
+    "rounds": 3,
+    "local_epochs": 1,
+    "batch_size": 32,
+    "num_workers": 0,
+    "optimizer": "AdamW",
+    "mixed_precision": false,
+    "feature_caching": true,
+    "freeze_backbone": true,
+    "partial_finetuning": false,
+    "aggregation": "sample_weighted",
+    "class_weight_source": "global_development",
+    "client_optimizer_reset_each_round": true,
+    "initialization": "fresh_classifier",
+    "hyperparameters": {
+        "mobilenet_v3_large": {
+            "classifier_lr": 0.0007661100707771367,
+            "weight_decay": 2.9380279387035354e-06,
+            "dropout": 0.062397808134481064,
+            "source": "hyperband_feature_extraction"
+        },
+        "efficientnet_b0": {
+            "classifier_lr": 0.001,
+            "weight_decay": 0.0001,
+            "dropout": 0.2,
+            "source": "baseline_feature_extraction"
+        },
+        "resnet50": {
+            "classifier_lr": 0.001,
+            "weight_decay": 0.0001,
+            "dropout": 0.2,
+            "source": "baseline_feature_extraction"
+        },
+        "vit_b_16": {
+            "classifier_lr": 0.001,
+            "weight_decay": 0.0001,
+            "dropout": 0.2,
+            "source": "baseline_feature_extraction"
+        },
+        "swin_t": {
+            "classifier_lr": 0.001,
+            "weight_decay": 0.0001,
+            "dropout": 0.2,
+            "source": "baseline_feature_extraction"
+        }
+    },
+    "feature_cache_dir": "dataset\\cache\\features_v1",
+    "federated_splits": "reports/federated_splits.csv",
+    "centralized_run_id": "final_cached_v1",
+    "training_split": "development",
+    "test_reserved": true,
+    "evaluate_test_after_training": false,
+    "validation_folds": [
+        1,
+        2,
+        3
+    ],
+    "validation_strategy": "stratified_3_fol",
+    "validation_checkpoint_selection": "last_round",
+    "final_checkpoint_selection": "last_round",
+    "validation_cross_validation": true
+}

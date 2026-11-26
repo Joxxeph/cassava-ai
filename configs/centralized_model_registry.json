@@ -1,0 +1,57 @@
+{
+    "run_id": "final_cached_v1",
+    "approach": "centralized",
+    "training_mode": "cached_feature_extraction",
+    "num_models": 5,
+    "num_classes": 5,
+    "class_mapping": {
+        "bacterial_blight": 0,
+        "brown_streak_disease": 1,
+        "green_mottle": 2,
+        "healthy": 3,
+        "mosaic_disease": 4
+    },
+    "image_size": [
+        224,
+        224
+    ],
+    "preprocessing_config": "configs/preprocessing_config.json",
+    "test_evaluation_pending": true,
+    "models": {
+        "mobilenet_v3_large": {
+            "model_path": "models\\final\\final_cached_v1\\mobilenet_v3_large\\final_model.pth",
+            "classifier_path": "models\\final\\final_cached_v1\\mobilenet_v3_large\\final_classifier.pth",
+            "feature_dim": 960,
+            "dropout": 0.062397808134481064,
+            "epochs": 3
+        },
+        "efficientnet_b0": {
+            "model_path": "models\\final\\final_cached_v1\\efficientnet_b0\\final_model.pth",
+            "classifier_path": "models\\final\\final_cached_v1\\efficientnet_b0\\final_classifier.pth",
+            "feature_dim": 1280,
+            "dropout": 0.2,
+            "epochs": 3
+        },
+        "resnet50": {
+            "model_path": "models\\final\\final_cached_v1\\resnet50\\final_model.pth",
+            "classifier_path": "models\\final\\final_cached_v1\\resnet50\\final_classifier.pth",
+            "feature_dim": 2048,
+            "dropout": 0.2,
+            "epochs": 3
+        },
+        "vit_b_16": {
+            "model_path": "models\\final\\final_cached_v1\\vit_b_16\\final_model.pth",
+            "classifier_path": "models\\final\\final_cached_v1\\vit_b_16\\final_classifier.pth",
+            "feature_dim": 768,
+            "dropout": 0.2,
+            "epochs": 3
+        },
+        "swin_t": {
+            "model_path": "models\\final\\final_cached_v1\\swin_t\\final_model.pth",
+            "classifier_path": "models\\final\\final_cached_v1\\swin_t\\final_classifier.pth",
+            "feature_dim": 768,
+            "dropout": 0.2,
+            "epochs": 3
+        }
+    }
+}

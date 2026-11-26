@@ -1,0 +1,6 @@
+﻿architecture,expected_optimizer_steps,skipped_optimizer_steps,skipped_steps_pct,actual_optimizer_steps
+swin_t,1895,0,0.0,1895
+vit_b_16,1895,-1137,-60.0,3032
+mobilenet_v3_large,1895,-2653,-140.0,4548
+resnet50,1895,-2653,-140.0,4548
+efficientnet_b0,1895,-2653,-140.0,4548

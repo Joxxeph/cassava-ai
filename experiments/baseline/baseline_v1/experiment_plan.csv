@@ -1,0 +1,6 @@
+﻿architecture,family,fold,batch_size,accumulation_steps,effective_batch_size,epochs_fe,epochs_ft
+mobilenet_v3_large,CNN,1,16,2,32,3,2
+efficientnet_b0,CNN,1,16,2,32,3,2
+resnet50,CNN,1,8,4,32,3,2
+vit_b_16,Transformer,1,4,8,32,3,2
+swin_t,Transformer,1,4,8,32,3,2

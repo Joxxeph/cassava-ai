@@ -1,0 +1,13 @@
+{
+    "model": "vit_b_16",
+    "approach": "federated",
+    "evaluation_split": "test",
+    "num_samples": 3210,
+    "inference_seconds": 0.009726000000227941,
+    "accuracy": 0.721183800623053,
+    "precision_macro": 0.5767352524520654,
+    "recall_macro": 0.6433259193360679,
+    "f1_macro": 0.6022497313576494,
+    "f1_weighted": 0.7353115770514753,
+    "balanced_accuracy": 0.6433259193360679
+}

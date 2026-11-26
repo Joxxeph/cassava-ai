@@ -1,0 +1,22 @@
+{
+    "architecture": "resnet50",
+    "stage": "final",
+    "validation_fold": null,
+    "rounds_completed": 3,
+    "local_epochs_completed": 6,
+    "training_images": 18187,
+    "validation_images": 0,
+    "optimizer_steps": 1710,
+    "classifier_path": "C:\\Users\\Joseph (YO)\\JGM\\U\\Semestre_10\\InteligenciaArtificial\\Proyecto_Yuca\\models\\federated\\federated_cached_v1\\final\\resnet50\\global_classifier.pth",
+    "model_path": "C:\\Users\\Joseph (YO)\\JGM\\U\\Semestre_10\\InteligenciaArtificial\\Proyecto_Yuca\\models\\federated\\federated_cached_v1\\final\\resnet50\\federated_model.pth",
+    "total_seconds": 8.87464159999945,
+    "total_minutes": 0.14791069333332416,
+    "test_used": false,
+    "artifact_hashes": {
+        "global_classifier.pth": "3bdaf74375749466b33b3c925773d36251d6fc6291f4c6fc7aad245711c94f76",
+        "local_history.csv": "2ea5d2bfbf1a327e65b7fe7aa12d88a510bd917541dfe859b0bff824fcfd98c4",
+        "round_history.csv": "5f6b83c2349585a7687b7e7f341434bd9fbc8d50d0d07173c2c40e6701743414",
+        "federated_model.pth": "aa98be4d5be13db92b50c8acf31b7aa119357123bff4449ed16d1d547da42b9e"
+    },
+    "status": "success"
+}

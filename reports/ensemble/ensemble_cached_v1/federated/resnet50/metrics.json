@@ -1,0 +1,13 @@
+{
+    "model": "resnet50",
+    "approach": "federated",
+    "evaluation_split": "test",
+    "num_samples": 3210,
+    "inference_seconds": 0.025616599999921164,
+    "accuracy": 0.7171339563862928,
+    "precision_macro": 0.5663958929466608,
+    "recall_macro": 0.6269426968116074,
+    "f1_macro": 0.5898479583664658,
+    "f1_weighted": 0.7309297508649648,
+    "balanced_accuracy": 0.6269426968116074
+}

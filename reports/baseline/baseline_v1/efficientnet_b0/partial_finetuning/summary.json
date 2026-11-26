@@ -1,0 +1,44 @@
+{
+    "architecture": "efficientnet_b0",
+    "best_epoch": 2,
+    "best_f1_macro": 0.5350103750277526,
+    "epochs_completed": 2,
+    "total_seconds": 507.1625342000043,
+    "early_stopping": false,
+    "metadata": {
+        "experiment": "baseline",
+        "architecture": "efficientnet_b0",
+        "fold": 1,
+        "seed": 42,
+        "batch_size": 16,
+        "dropout": 0.2,
+        "class_mapping": {
+            "bacterial_blight": 0,
+            "brown_streak_disease": 1,
+            "green_mottle": 2,
+            "healthy": 3,
+            "mosaic_disease": 4
+        },
+        "class_weights": [
+            3.936363697052002,
+            1.9554839134216309,
+            1.7934911251068115,
+            1.6608219146728516,
+            0.32521459460258484
+        ],
+        "train_images": 12124,
+        "validation_images": 6063,
+        "amp": {
+            "dtype": "float16",
+            "init_scale": 1024.0,
+            "growth_factor": 2.0,
+            "backoff_factor": 0.5,
+            "growth_interval": 2000
+        },
+        "pretrained": true,
+        "training_mode": "partial_finetuning",
+        "num_classes": 5,
+        "accumulation_steps": 2,
+        "mixed_precision": true
+    }
+}

@@ -1,0 +1,3 @@
+﻿stage,expected_steps,actual_steps,skipped_steps,skipped_pct
+feature_extraction,1137,2274,-1137,-100.0
+partial_finetuning,758,2274,-1516,-200.0

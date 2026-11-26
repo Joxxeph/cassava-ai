@@ -1,0 +1,6 @@
+﻿architecture,family,pretrained_weights,num_classes,input_shape,output_shape,status,total_parameters,trainable_parameters,frozen_parameters,trainable_percentage
+mobilenet_v3_large,CNN,MobileNet_V3_Large_Weights.IMAGENET1K_V2,5,"(2, 3, 224, 224)","(2, 5)",success,4208437,1236485,2971952,29.381098018100303
+efficientnet_b0,CNN,EfficientNet_B0_Weights.IMAGENET1K_V1,5,"(2, 3, 224, 224)","(2, 5)",success,4013953,6405,4007548,0.15956838557900405
+resnet50,CNN,ResNet50_Weights.IMAGENET1K_V2,5,"(2, 3, 224, 224)","(2, 5)",success,23518277,10245,23508032,0.04356186467231422
+vit_b_16,Transformer,ViT_B_16_Weights.IMAGENET1K_V1,5,"(2, 3, 224, 224)","(2, 5)",success,85802501,3845,85798656,0.004481221357405421
+swin_t,Transformer,Swin_T_Weights.IMAGENET1K_V1,5,"(2, 3, 224, 224)","(2, 5)",success,27523199,3845,27519354,0.013970033061927139

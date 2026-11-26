@@ -1,0 +1,22 @@
+{
+    "architecture": "swin_t",
+    "family": "Transformer",
+    "fold": 3,
+    "best_epoch": 2,
+    "epochs_completed": 3,
+    "train_images": 12125,
+    "validation_images": 6062,
+    "hyperparameter_source": "baseline_feature_extraction",
+    "accuracy": 0.7375453645661498,
+    "precision_macro": 0.6045179513533793,
+    "recall_macro": 0.6619511253414743,
+    "f1_macro": 0.6261421585437759,
+    "f1_weighted": 0.7503133549322437,
+    "balanced_accuracy": 0.6619511253414743,
+    "loss": 0.9073888465127549,
+    "seconds": 0.1324408999971638,
+    "num_samples": 6062,
+    "total_seconds": 3.4345055000012508,
+    "total_minutes": 0.05724175833335418,
+    "status": "success"
+}

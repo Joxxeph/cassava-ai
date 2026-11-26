@@ -1,0 +1,91 @@
+{
+    "class_names": [
+        "bacterial_blight",
+        "brown_streak_disease",
+        "green_mottle",
+        "healthy",
+        "mosaic_disease"
+    ],
+    "classification_report": {
+        "bacterial_blight": {
+            "precision": 0.4433734939759036,
+            "recall": 0.5974025974025974,
+            "f1-score": 0.5089903181189488,
+            "support": 308.0
+        },
+        "brown_streak_disease": {
+            "precision": 0.520671834625323,
+            "recall": 0.65,
+            "f1-score": 0.5781922525107605,
+            "support": 620.0
+        },
+        "green_mottle": {
+            "precision": 0.4935897435897436,
+            "recall": 0.5695266272189349,
+            "f1-score": 0.5288461538461539,
+            "support": 676.0
+        },
+        "healthy": {
+            "precision": 0.5082508250825083,
+            "recall": 0.6328767123287671,
+            "f1-score": 0.5637583892617449,
+            "support": 730.0
+        },
+        "mosaic_disease": {
+            "precision": 0.9359296482412061,
+            "recall": 0.7993562231759657,
+            "f1-score": 0.8622685185185185,
+            "support": 3728.0
+        },
+        "accuracy": 0.7281425272187397,
+        "macro avg": {
+            "precision": 0.5803631091029369,
+            "recall": 0.649832432025253,
+            "f1-score": 0.6084111264512253,
+            "support": 6062.0
+        },
+        "weighted avg": {
+            "precision": 0.7676032779994049,
+            "recall": 0.7281425272187397,
+            "f1-score": 0.7421360731995081,
+            "support": 6062.0
+        }
+    },
+    "confusion_matrix": [
+        [
+            184,
+            55,
+            6,
+            55,
+            8
+        ],
+        [
+            70,
+            403,
+            40,
+            60,
+            47
+        ],
+        [
+            20,
+            49,
+            385,
+            111,
+            111
+        ],
+        [
+            87,
+            96,
+            47,
+            462,
+            38
+        ],
+        [
+            54,
+            171,
+            302,
+            221,
+            2980
+        ]
+    ]
+}

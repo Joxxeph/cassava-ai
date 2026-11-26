@@ -1,0 +1,11 @@
+﻿architecture,approach,max_probability_difference,prediction_agreement,probabilities_close
+mobilenet_v3_large,centralized,3.277137875556946e-05,True,True
+mobilenet_v3_large,federated,9.283050894737244e-05,True,True
+efficientnet_b0,centralized,0.00017082691192626953,True,True
+efficientnet_b0,federated,0.00010132789611816406,True,True
+resnet50,centralized,6.335973739624023e-05,True,True
+resnet50,federated,8.13603401184082e-05,True,True
+vit_b_16,centralized,0.0005943179130554199,True,True
+vit_b_16,federated,0.0003331899642944336,True,True
+swin_t,centralized,2.3820437490940094e-05,True,True
+swin_t,federated,2.8058886528015137e-05,True,True

@@ -1,0 +1,155 @@
+{
+    "model": "ensemble",
+    "approach": "both",
+    "results": {
+        "centralized": {
+            "predicted_index": 4,
+            "predicted_class": "mosaic_disease",
+            "confidence": 0.8954323530197144,
+            "probabilities": {
+                "bacterial_blight": 0.02948743663728237,
+                "brown_streak_disease": 0.0219256654381752,
+                "green_mottle": 0.03308970481157303,
+                "healthy": 0.020064862444996834,
+                "mosaic_disease": 0.8954323530197144
+            },
+            "individual_predictions": {
+                "mobilenet_v3_large": {
+                    "predicted_index": 4,
+                    "predicted_class": "mosaic_disease",
+                    "confidence": 0.9671638011932373,
+                    "probabilities": {
+                        "bacterial_blight": 0.005892426706850529,
+                        "brown_streak_disease": 0.012198062613606453,
+                        "green_mottle": 0.011508888565003872,
+                        "healthy": 0.0032368903048336506,
+                        "mosaic_disease": 0.9671638011932373
+                    }
+                },
+                "efficientnet_b0": {
+                    "predicted_index": 4,
+                    "predicted_class": "mosaic_disease",
+                    "confidence": 0.9004074335098267,
+                    "probabilities": {
+                        "bacterial_blight": 0.008719422854483128,
+                        "brown_streak_disease": 0.015020270831882954,
+                        "green_mottle": 0.03566189482808113,
+                        "healthy": 0.040190983563661575,
+                        "mosaic_disease": 0.9004074335098267
+                    }
+                },
+                "resnet50": {
+                    "predicted_index": 4,
+                    "predicted_class": "mosaic_disease",
+                    "confidence": 0.9531325101852417,
+                    "probabilities": {
+                        "bacterial_blight": 0.0036211225669831038,
+                        "brown_streak_disease": 0.01777130924165249,
+                        "green_mottle": 0.010794083587825298,
+                        "healthy": 0.01468095276504755,
+                        "mosaic_disease": 0.9531325101852417
+                    }
+                },
+                "vit_b_16": {
+                    "predicted_index": 4,
+                    "predicted_class": "mosaic_disease",
+                    "confidence": 0.6713522672653198,
+                    "probabilities": {
+                        "bacterial_blight": 0.12699255347251892,
+                        "brown_streak_disease": 0.05894392356276512,
+                        "green_mottle": 0.10149622708559036,
+                        "healthy": 0.041214946657419205,
+                        "mosaic_disease": 0.6713522672653198
+                    }
+                },
+                "swin_t": {
+                    "predicted_index": 4,
+                    "predicted_class": "mosaic_disease",
+                    "confidence": 0.9851056337356567,
+                    "probabilities": {
+                        "bacterial_blight": 0.002211653394624591,
+                        "brown_streak_disease": 0.005694759543985128,
+                        "green_mottle": 0.005987436510622501,
+                        "healthy": 0.0010005375370383263,
+                        "mosaic_disease": 0.9851056337356567
+                    }
+                }
+            }
+        },
+        "federated": {
+            "predicted_index": 4,
+            "predicted_class": "mosaic_disease",
+            "confidence": 0.8872374892234802,
+            "probabilities": {
+                "bacterial_blight": 0.02459624782204628,
+                "brown_streak_disease": 0.02744900807738304,
+                "green_mottle": 0.03849628195166588,
+                "healthy": 0.022220950573682785,
+                "mosaic_disease": 0.8872374892234802
+            },
+            "individual_predictions": {
+                "mobilenet_v3_large": {
+                    "predicted_index": 4,
+                    "predicted_class": "mosaic_disease",
+                    "confidence": 0.9152842164039612,
+                    "probabilities": {
+                        "bacterial_blight": 0.026514628902077675,
+                        "brown_streak_disease": 0.018981648609042168,
+                        "green_mottle": 0.030783088877797127,
+                        "healthy": 0.008436472155153751,
+                        "mosaic_disease": 0.9152842164039612
+                    }
+                },
+                "efficientnet_b0": {
+                    "predicted_index": 4,
+                    "predicted_class": "mosaic_disease",
+                    "confidence": 0.8810266256332397,
+                    "probabilities": {
+                        "bacterial_blight": 0.018894590437412262,
+                        "brown_streak_disease": 0.01979193277657032,
+                        "green_mottle": 0.04900706559419632,
+                        "healthy": 0.031279757618904114,
+                        "mosaic_disease": 0.8810266256332397
+                    }
+                },
+                "resnet50": {
+                    "predicted_index": 4,
+                    "predicted_class": "mosaic_disease",
+                    "confidence": 0.9243512749671936,
+                    "probabilities": {
+                        "bacterial_blight": 0.009329738095402718,
+                        "brown_streak_disease": 0.018567126244306564,
+                        "green_mottle": 0.023860769346356392,
+                        "healthy": 0.023890960961580276,
+                        "mosaic_disease": 0.9243512749671936
+                    }
+                },
+                "vit_b_16": {
+                    "predicted_index": 4,
+                    "predicted_class": "mosaic_disease",
+                    "confidence": 0.7380751371383667,
+                    "probabilities": {
+                        "bacterial_blight": 0.06475213170051575,
+                        "brown_streak_disease": 0.07199493795633316,
+                        "green_mottle": 0.079813152551651,
+                        "healthy": 0.045364558696746826,
+                        "mosaic_disease": 0.7380751371383667
+                    }
+                },
+                "swin_t": {
+                    "predicted_index": 4,
+                    "predicted_class": "mosaic_disease",
+                    "confidence": 0.9774501323699951,
+                    "probabilities": {
+                        "bacterial_blight": 0.003490146715193987,
+                        "brown_streak_disease": 0.007909394800662994,
+                        "green_mottle": 0.009017329663038254,
+                        "healthy": 0.00213300040923059,
+                        "mosaic_disease": 0.9774501323699951
+                    }
+                }
+            }
+        }
+    },
+    "inference_seconds": 7.332208499999979
+}

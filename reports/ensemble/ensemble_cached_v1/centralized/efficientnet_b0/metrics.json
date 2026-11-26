@@ -1,0 +1,13 @@
+{
+    "model": "efficientnet_b0",
+    "approach": "centralized",
+    "evaluation_split": "test",
+    "num_samples": 3210,
+    "inference_seconds": 0.02942059999986668,
+    "accuracy": 0.7037383177570093,
+    "precision_macro": 0.5525966427419187,
+    "recall_macro": 0.6256351836604874,
+    "f1_macro": 0.5770682136285268,
+    "f1_weighted": 0.71956727777106,
+    "balanced_accuracy": 0.6256351836604874
+}

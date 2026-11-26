@@ -1,0 +1,35 @@
+{
+    "optimizer": {
+        "name": "AdamW",
+        "weight_decay": 0.0001
+    },
+    "loss": {
+        "name": "WeightedCrossEntropyLoss",
+        "weight_method": "balanced",
+        "reduction": "sum",
+        "weights_source": "training_fold"
+    },
+    "feature_extraction": {
+        "epochs": 3,
+        "classifier_lr": 0.001
+    },
+    "partial_finetuning": {
+        "epochs": 10,
+        "classifier_lr": 0.0001,
+        "backbone_lr": 1e-05
+    },
+    "scheduler": {
+        "name": "ReduceLROnPlateau",
+        "factor": 0.5,
+        "patience": 1,
+        "min_lr": 1e-07
+    },
+    "early_stopping": {
+        "patience": 3,
+        "min_delta": 0.0
+    },
+    "selection_metric": "f1_macro",
+    "mixed_precision": true,
+    "effective_batch_size": 32,
+    "seed": 42
+}

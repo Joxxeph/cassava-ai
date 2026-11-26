@@ -1,0 +1,6 @@
+﻿architecture,total_trials,completed,pruned,failed,running,finished_trials
+mobilenet_v3_large,7,2,4,1,0,6
+efficientnet_b0,4,2,1,1,0,3
+resnet50,3,2,1,0,0,3
+vit_b_16,3,3,0,0,0,3
+swin_t,3,2,1,0,0,3

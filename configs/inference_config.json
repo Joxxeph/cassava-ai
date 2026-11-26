@@ -1,0 +1,57 @@
+{
+    "run_id": "ensemble_cached_v1",
+    "num_classes": 5,
+    "class_mapping": {
+        "bacterial_blight": 0,
+        "brown_streak_disease": 1,
+        "green_mottle": 2,
+        "healthy": 3,
+        "mosaic_disease": 4
+    },
+    "architectures": [
+        "mobilenet_v3_large",
+        "efficientnet_b0",
+        "resnet50",
+        "vit_b_16",
+        "swin_t"
+    ],
+    "image_size": [
+        224,
+        224
+    ],
+    "preprocessing_config": "configs/preprocessing_config.json",
+    "centralized_registry": "configs/centralized_model_registry.json",
+    "federated_registry": "configs/federated_model_registry.json",
+    "ensemble_method": "soft_voting",
+    "weights": {
+        "mobilenet_v3_large": 0.2,
+        "efficientnet_b0": 0.2,
+        "resnet50": 0.2,
+        "vit_b_16": 0.2,
+        "swin_t": 0.2
+    },
+    "shared_backbones": true,
+    "mixed_precision_by_model": {
+        "mobilenet_v3_large": true,
+        "efficientnet_b0": true,
+        "resnet50": true,
+        "vit_b_16": true,
+        "swin_t": true
+    },
+    "execution_mode": "sequential",
+    "classifier_precision": "float32",
+    "available_approaches": [
+        "centralized",
+        "federated",
+        "both"
+    ],
+    "available_models": [
+        "mobilenet_v3_large",
+        "efficientnet_b0",
+        "resnet50",
+        "vit_b_16",
+        "swin_t",
+        "ensemble"
+    ],
+    "test_used_for_weight_optimization": false
+}

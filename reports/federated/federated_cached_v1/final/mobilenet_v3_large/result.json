@@ -1,0 +1,22 @@
+{
+    "architecture": "mobilenet_v3_large",
+    "stage": "final",
+    "validation_fold": null,
+    "rounds_completed": 3,
+    "local_epochs_completed": 6,
+    "training_images": 18187,
+    "validation_images": 0,
+    "optimizer_steps": 1710,
+    "classifier_path": "C:\\Users\\Joseph (YO)\\JGM\\U\\Semestre_10\\InteligenciaArtificial\\Proyecto_Yuca\\models\\federated\\federated_cached_v1\\final\\mobilenet_v3_large\\global_classifier.pth",
+    "model_path": "C:\\Users\\Joseph (YO)\\JGM\\U\\Semestre_10\\InteligenciaArtificial\\Proyecto_Yuca\\models\\federated\\federated_cached_v1\\final\\mobilenet_v3_large\\federated_model.pth",
+    "total_seconds": 9.201532200000656,
+    "total_minutes": 0.15335887000001094,
+    "test_used": false,
+    "artifact_hashes": {
+        "global_classifier.pth": "df3427fb87e4bbd6008310a16a0efd2c329a70aeaa7f960362a10fc68171504c",
+        "local_history.csv": "5ac9faca63e9d1002a5922f6590075f9f77ec19c5baafc7ad07e9114edc12514",
+        "round_history.csv": "bb23ce0406f309346d576e6900ae56a263b162b90467644e09f59c799cc1b426",
+        "federated_model.pth": "e8f79e48c2fd2f8a805c33f453b908c08de27231521198fb62ad8b4cfef6c636"
+    },
+    "status": "success"
+}

@@ -1,0 +1,31 @@
+{
+    "architecture": "swin_t",
+    "stage": "validation",
+    "validation_fold": 3,
+    "rounds_completed": 3,
+    "local_epochs_completed": 6,
+    "training_images": 12125,
+    "validation_images": 6062,
+    "optimizer_steps": 1140,
+    "classifier_path": "C:\\Users\\Joseph (YO)\\JGM\\U\\Semestre_10\\InteligenciaArtificial\\Proyecto_Yuca\\models\\federated\\federated_cached_v1\\validation_fold_3\\swin_t\\global_classifier.pth",
+    "model_path": null,
+    "total_seconds": 5.944114699999773,
+    "total_minutes": 0.09906857833332955,
+    "test_used": false,
+    "artifact_hashes": {
+        "global_classifier.pth": "0ff7d600cd599c87f57ca3014f5ae1560f9c5df04f8202413aa246c1a4f2c690",
+        "local_history.csv": "4ecd27da06cde84b13acd60a709c865b48f82394d84e49877381b827c86db70a",
+        "round_history.csv": "d6afc86d23ae5e39a412f850683540a3071eb69e6bc7cac429523b19582e3117",
+        "validation_predictions.csv": "8faa26a4647ee66c6a7692c80b1631d2d87c730dec443a6a6de2271f9e359290"
+    },
+    "accuracy": 0.732596502804355,
+    "precision_macro": 0.592436245768184,
+    "recall_macro": 0.6621919661379427,
+    "f1_macro": 0.6209912768491471,
+    "f1_weighted": 0.7460449034960962,
+    "balanced_accuracy": 0.6621919661379427,
+    "loss": 0.9052276599029997,
+    "seconds": 0.15703930000017863,
+    "num_samples": 6062,
+    "status": "success"
+}

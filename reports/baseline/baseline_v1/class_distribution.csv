@@ -1,0 +1,6 @@
+﻿class,train,validation,total
+mosaic_disease,7456,3728,11184
+healthy,1460,730,2190
+green_mottle,1352,676,2028
+brown_streak_disease,1240,621,1861
+bacterial_blight,616,308,924

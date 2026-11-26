@@ -1,0 +1,22 @@
+{
+    "architecture": "mobilenet_v3_large",
+    "family": "CNN",
+    "fold": 1,
+    "best_epoch": 2,
+    "epochs_completed": 3,
+    "train_images": 12124,
+    "validation_images": 6063,
+    "hyperparameter_source": "hyperband_feature_extraction",
+    "accuracy": 0.7201055583044698,
+    "precision_macro": 0.5714276007213176,
+    "recall_macro": 0.6131331406394513,
+    "f1_macro": 0.5862779171129742,
+    "f1_weighted": 0.7329773527868668,
+    "balanced_accuracy": 0.6131331406394513,
+    "loss": 0.9888646594836764,
+    "seconds": 0.11173340000095777,
+    "num_samples": 6063,
+    "total_seconds": 5.180306399997789,
+    "total_minutes": 0.08633843999996316,
+    "status": "success"
+}

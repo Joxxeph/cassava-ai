@@ -1,0 +1,55 @@
+{
+    "seed": 42,
+    "architectures": [
+        "mobilenet_v3_large",
+        "efficientnet_b0",
+        "resnet50",
+        "vit_b_16",
+        "swin_t"
+    ],
+    "training_mode": "cached_feature_extraction",
+    "feature_cache_dir": "dataset\\cache\\features_v1",
+    "epochs": 3,
+    "batch_size": 32,
+    "mixed_precision": false,
+    "optimizer": "AdamW",
+    "scheduler": null,
+    "augmentation": false,
+    "class_weighting": true,
+    "training_split": "development",
+    "num_training_images": 18187,
+    "hyperparameters": {
+        "mobilenet_v3_large": {
+            "classifier_lr": 0.0007661100707771367,
+            "weight_decay": 2.9380279387035354e-06,
+            "dropout": 0.062397808134481064,
+            "source": "hyperband_feature_extraction"
+        },
+        "efficientnet_b0": {
+            "classifier_lr": 0.001,
+            "weight_decay": 0.0001,
+            "dropout": 0.2,
+            "source": "baseline_feature_extraction"
+        },
+        "resnet50": {
+            "classifier_lr": 0.001,
+            "weight_decay": 0.0001,
+            "dropout": 0.2,
+            "source": "baseline_feature_extraction"
+        },
+        "vit_b_16": {
+            "classifier_lr": 0.001,
+            "weight_decay": 0.0001,
+            "dropout": 0.2,
+            "source": "baseline_feature_extraction"
+        },
+        "swin_t": {
+            "classifier_lr": 0.001,
+            "weight_decay": 0.0001,
+            "dropout": 0.2,
+            "source": "baseline_feature_extraction"
+        }
+    },
+    "cross_validation_run_id": "cv_cached_v1",
+    "test_reserved": true
+}

@@ -1,0 +1,45 @@
+{
+    "run_id": "ensemble_cached_v1",
+    "num_ensembles": 2,
+    "num_models_per_ensemble": 5,
+    "num_classes": 5,
+    "class_mapping": {
+        "bacterial_blight": 0,
+        "brown_streak_disease": 1,
+        "green_mottle": 2,
+        "healthy": 3,
+        "mosaic_disease": 4
+    },
+    "method": "soft_voting",
+    "weights": {
+        "mobilenet_v3_large": 0.2,
+        "efficientnet_b0": 0.2,
+        "resnet50": 0.2,
+        "vit_b_16": 0.2,
+        "swin_t": 0.2
+    },
+    "architectures": [
+        "mobilenet_v3_large",
+        "efficientnet_b0",
+        "resnet50",
+        "vit_b_16",
+        "swin_t"
+    ],
+    "shared_backbones": true,
+    "inference_module": "src/inference.py",
+    "inference_config": "configs/inference_config.json",
+    "ensembles": {
+        "centralized": {
+            "registry": "configs/centralized_model_registry.json",
+            "metrics_path": "reports\\ensemble\\ensemble_cached_v1\\centralized\\heterogeneous_ensemble\\metrics.json"
+        },
+        "federated": {
+            "registry": "configs/federated_model_registry.json",
+            "metrics_path": "reports\\ensemble\\ensemble_cached_v1\\federated\\heterogeneous_ensemble\\metrics.json"
+        }
+    },
+    "evaluation_split": "test",
+    "test_images": 3210,
+    "test_evaluation_completed": true,
+    "test_used_for_weight_optimization": false
+}

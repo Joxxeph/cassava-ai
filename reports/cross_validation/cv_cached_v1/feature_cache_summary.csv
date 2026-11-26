@@ -1,0 +1,6 @@
+﻿architecture,num_images,feature_dim,extraction_minutes,cache_size_mib,cache_path,status
+mobilenet_v3_large,18187,960,3.153955040000013,67.40926551818848,C:\Users\Joseph (YO)\JGM\U\Semestre_10\InteligenciaArtificial\Proyecto_Yuca\dataset\cache\features_v1\mobilenet_v3_large.pth,success
+efficientnet_b0,18187,1280,3.210752171666657,89.61017608642578,C:\Users\Joseph (YO)\JGM\U\Semestre_10\InteligenciaArtificial\Proyecto_Yuca\dataset\cache\features_v1\efficientnet_b0.pth,success
+resnet50,18187,2048,3.6281003149999984,142.8923625946045,C:\Users\Joseph (YO)\JGM\U\Semestre_10\InteligenciaArtificial\Proyecto_Yuca\dataset\cache\features_v1\resnet50.pth,success
+vit_b_16,18187,768,6.313650804999997,54.08865165710449,C:\Users\Joseph (YO)\JGM\U\Semestre_10\InteligenciaArtificial\Proyecto_Yuca\dataset\cache\features_v1\vit_b_16.pth,success
+swin_t,18187,768,5.05736056333335,54.088579177856445,C:\Users\Joseph (YO)\JGM\U\Semestre_10\InteligenciaArtificial\Proyecto_Yuca\dataset\cache\features_v1\swin_t.pth,success

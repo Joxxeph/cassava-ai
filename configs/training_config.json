@@ -1,0 +1,83 @@
+{
+    "seed": 42,
+    "num_classes": 5,
+    "image_size": [
+        224,
+        224
+    ],
+    "architectures": [
+        "mobilenet_v3_large",
+        "efficientnet_b0",
+        "resnet50",
+        "vit_b_16",
+        "swin_t"
+    ],
+    "transfer_learning": {
+        "pretrained": true,
+        "freeze_backbone": true,
+        "partial_finetuning": true
+    },
+    "training": {
+        "batch_size": 4,
+        "effective_batch_size": 32,
+        "gradient_accumulation_steps": 8,
+        "num_workers": 0,
+        "baseline_epochs": 3,
+        "max_finetuning_epochs": 10,
+        "optimizer": "AdamW",
+        "learning_rate": 0.001,
+        "weight_decay": 0.0001,
+        "dropout": 0.2,
+        "loss_function": "CrossEntropyLoss",
+        "class_weighting": true,
+        "class_weight_method": "balanced",
+        "mixed_precision": true,
+        "amp": {
+            "dtype": "float16",
+            "init_scale": 1024.0,
+            "growth_factor": 2.0,
+            "backoff_factor": 0.5,
+            "growth_interval": 2000
+        }
+    },
+    "model_settings": {
+        "mobilenet_v3_large": {
+            "batch_size": 16,
+            "gradient_accumulation_steps": 2
+        },
+        "efficientnet_b0": {
+            "batch_size": 16,
+            "gradient_accumulation_steps": 2
+        },
+        "resnet50": {
+            "batch_size": 8,
+            "gradient_accumulation_steps": 4
+        },
+        "vit_b_16": {
+            "batch_size": 4,
+            "gradient_accumulation_steps": 8
+        },
+        "swin_t": {
+            "batch_size": 4,
+            "gradient_accumulation_steps": 8
+        }
+    },
+    "evaluation": {
+        "primary_metric": "f1_macro",
+        "secondary_metrics": [
+            "accuracy",
+            "precision_macro",
+            "recall_macro"
+        ],
+        "n_splits": 3
+    },
+    "optimization": {
+        "framework": "Optuna",
+        "algorithm": "Hyperband",
+        "min_resource": 1,
+        "max_resource": 9,
+        "reduction_factor": 3,
+        "n_trials": 12,
+        "validation_fold": 1
+    }
+}

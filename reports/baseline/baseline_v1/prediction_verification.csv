@@ -1,0 +1,6 @@
+﻿architecture,num_predictions,num_classes,status
+swin_t,6063,5,success
+vit_b_16,6063,5,success
+mobilenet_v3_large,6063,5,success
+resnet50,6063,5,success
+efficientnet_b0,6063,5,success

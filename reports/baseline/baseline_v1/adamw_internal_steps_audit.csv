@@ -1,0 +1,11 @@
+﻿architecture,stage,checkpoint_epoch,expected_steps,adamw_min_steps,adamw_max_steps,adamw_unique_steps,parameter_tensors,step_distribution,step_ratio,valid_internal_steps
+mobilenet_v3_large,feature_extraction,3,1137,1137,1137,[1137],4,{1137: 4},1.0,True
+mobilenet_v3_large,partial_finetuning,2,758,758,758,[758],20,{758: 20},1.0,True
+efficientnet_b0,feature_extraction,3,1137,1137,1137,[1137],2,{1137: 2},1.0,True
+efficientnet_b0,partial_finetuning,2,758,758,758,[758],18,{758: 18},1.0,True
+resnet50,feature_extraction,3,1137,1137,1137,[1137],2,{1137: 2},1.0,True
+resnet50,partial_finetuning,2,758,758,758,[758],32,{758: 32},1.0,True
+vit_b_16,feature_extraction,3,1137,1137,1137,[1137],2,{1137: 2},1.0,True
+vit_b_16,partial_finetuning,2,758,758,758,[758],28,{758: 28},1.0,True
+swin_t,feature_extraction,3,1137,1137,1137,[1137],2,{1137: 2},1.0,True
+swin_t,partial_finetuning,2,758,758,758,[758],30,{758: 30},1.0,True
